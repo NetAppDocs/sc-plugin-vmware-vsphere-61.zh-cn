@@ -1,0 +1,29 @@
+---
+permalink: scv_releasenotes_whats_new.html 
+sidebar: sidebar 
+keywords: 'what"s new, release notes, scv, 6.1' 
+summary: 了解适用于SnapCenter Plug-in for VMware vSphere中提供的新功能。 
+---
+= SnapCenter Plug-in for VMware vSphere中的新增功能
+:allow-uri-read: 
+
+
+[role="lead"]
+*支持ASA r2 系统上的虚拟机和 VMFS 数据存储*
+
+VMware vSphere 6.1 版本的SnapCenter插件支持在ASA r2 系统上配置虚拟机 (VM) 和 VMFS 数据存储区。 ASA r2 系统提供统一的硬件和软件解决方案，可针对仅使用 SAN 的客户的需求创建简化的体验。SnapCenter Plug-in for VMware vSphere支持ASA r2 系统上的虚拟机、数据存储区和虚拟机磁盘格式 (VMDK) 的功能包括：
+
+* 用于主要保护的一致性组配置
+* 基于一致性组的备份
+* 克隆工作流程
+* 恢复工作流程
+* 创建或修改资源组时的二次保护配置。
++
+
+NOTE: 仅ONTAP 9.16.1 及更高版本支持二级保护
+
+
+
+*支持二级防篡改快照（TPS）*
+
+SnapCenter Plug-in for VMware vSphere引入了对辅助 TPS 的支持，确保辅助快照副本不会被勒索软件攻击者或恶意管理员删除或更改，并且即使在遭受攻击后也能使用它们。

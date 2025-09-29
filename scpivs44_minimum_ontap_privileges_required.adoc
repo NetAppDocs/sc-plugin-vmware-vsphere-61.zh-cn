@@ -1,0 +1,86 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_minimum_ontap_privileges_required.html 
+keywords:  
+summary: 所需的最低ONTAP权限根据您用于数据保护的SnapCenter插件而有所不同。 
+---
+= 需要ONTAP权限
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+所需的最低ONTAP权限根据您用于数据保护的SnapCenter插件而有所不同。
+
+
+NOTE: 从适用于 VMware (SCV) 5.0 的SnapCenter插件开始，您需要为任何具有自定义基于角色的 SCV 访问权限的ONTAP用户添加 HTTP 和 ONTAPI 类型的应用程序作为用户登录方法。如果无法访问这些应用程序，备份将会失败。您需要重新启动 SCV 服务才能识别ONTAP用户登录方法的更改。
+
+
+
+== 所需的最低ONTAP权限
+
+所有SnapCenter插件都需要以下最低权限。
+
+|===
+
+
+| 所有访问命令：最低ONTAP权限。 
+
+
+| 事件生成自动支持日志 
+
+
+| 作业历史记录显示作业显示作业停止 
+
+
+| lun lun 创建 lun 删除 lun igroup 添加 lun igroup 创建 lun igroup 删除 lun igroup 重命名 lun igroup 显示 lun 映射 添加报告节点 lun 映射 创建 lun 映射 删除 lun 映射 删除报告节点 lun 映射 显示 lun 修改 lun 移入卷 lun 脱机 lun 联机 lun 持久预留 清除 lun 调整 lun 大小 串行 lun 显示 
+
+
+| snapmirror 列表目标 snapmirror 策略添加规则 snapmirror 策略修改规则 snapmirror 策略删除规则 snapmirror 策略显示 snapmirror 恢复 snapmirror 显示 snapmirror 显示历史记录 snapmirror 更新 snapmirror update-ls-set 
+
+
+| 版本 
+
+
+| 卷克隆 创建卷克隆 显示卷克隆拆分 启动卷克隆拆分状态 卷克隆拆分 停止卷 创建卷 删除卷 销毁卷 文件克隆 创建卷文件 显示磁盘使用情况 卷脱机 卷联机 卷托管功能 卷 修改卷 qtree 创建卷 qtree 删除卷 qtree 修改卷 qtree 显示卷 限制卷 显示卷快照 创建卷快照 删除卷快照 修改卷快照 修改快照锁定到期时间 卷快照 重命名卷快照 恢复卷快照 恢复文件卷快照 显示卷快照 显示增量卷 卸载 
+
+
+| vserver cifs vserver cifs 共享 创建 vserver cifs 共享 删除 vserver cifs 卷影复制 显示 vserver cifs 共享 显示 vserver cifs 显示 vserver 导出策略 vserver 导出策略 创建 vserver 导出策略 删除 vserver 导出策略规则 创建 vserver 导出策略规则 显示 vserver 导出策略 显示 vserver iscsi vserver iscsi 连接 显示 vserver nvme 子系统控制器 vserver nvme 子系统控制器 显示 vserver nvme 子系统 创建 vserver nvme 子系统 删除 vserver nvme 子系统主机 vserver nvme 子系统主机 显示 vserver nvme 子系统主机 添加 vserver nvme 子系统主机 删除 vserver nvme 子系统映射 vserver nvme 子系统映射 显示 vserver nvme 子系统映射 添加 vserver nvme 子系统映射 删除 vserver nvme 子系统 修改 vserver nvme 子系统 显示 vserver nvme 命名空间 创建 vserver nvme 命名空间 删除 vserver nvme 命名空间 修改 vserver nvme 命名空间显示网络接口 网络接口故障转移组 
+|===
+|===
+| 只读命令：最低ONTAPPrivileges 
+
+
+| 集群身份显示网络接口显示虚拟服务器虚拟服务器对等虚拟服务器显示 
+|===
+|===
+| 全访问命令：最低ONTAP权限 
+
+
+| 一致性组存储单元显示 
+|===
+创建与数据 vServer 关联的角色时，可以忽略 _cluster identity show_ cluster level 命令。
+
+
+NOTE: 您可以忽略有关不受支持的 vServer 命令的警告消息。
+
+
+
+== 更多ONTAP信息
+
+* 您需要ONTAP 9.12.1 或更高版本才能使用SnapMirror主动同步功能。
+* 要使用防篡改快照 (TPS) 功能：
++
+** 您需要ONTAP 9.13.1 及更高版本才能使用 SAN
+** 您需要ONTAP 9.12.1 及更高版本才能使用 NFS
+
+
+* 对于 NVMe over TCP 和 NVMe over FC 协议，您需要ONTAP 9.10.1 及更高版本。
+
+
+
+NOTE: 从ONTAP版本 9.11.1 开始，与ONTAP集群的通信是通过 REST API 进行的。ONTAP用户应该启用 http 应用程序。但是，如果发现ONTAP REST API 存在问题，配置键“FORCE_ZAPI”有助于切换到传统的 ZAPI 工作流程。您可能需要使用配置 APIS 添加或更新此密钥并将其设置为 true。请参阅知识库文章， https://kb.netapp.com/mgmt/SnapCenter/How_to_use_RestAPI_to_edit_configuration_parameters_in_SCV["如何使用 RestAPI 编辑 SCV 中的配置参数"]了解更多信息。

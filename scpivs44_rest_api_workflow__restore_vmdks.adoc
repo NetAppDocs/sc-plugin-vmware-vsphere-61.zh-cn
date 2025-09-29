@@ -1,0 +1,57 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_api_workflow__restore_vmdks.html 
+keywords:  
+summary: 要使用适用于SnapCenter Plug-in for VMware vSphere对 VMDK 执行还原操作，必须遵循规定的 REST API 调用顺序。 
+---
+= 用于恢复 VMDK 的 REST API 工作流
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+要使用适用于SnapCenter Plug-in for VMware vSphere对 VMDK 执行还原操作，必须遵循规定的 REST API 调用顺序。
+
+对于每个 REST API，添加 `\https://<server>:<port>`在 REST API 的前面形成一个完整的端点。
+
+|===
+| 步骤 | REST API | 注释 
+
+
+| 1 | 前往 `\http://<vCenter-IP>/mob` | 从 VMware 管理对象 URL 中查找 VM moref。注意 VMDK 所在 VM 的 *moref*。 
+
+
+| 2 | `/4.1/vm/{moref}/backups` | `Get VM Backups`获取指定 VM 的备份列表。传递步骤 1 中的 *moref*。记下您要恢复的备份的 *backupId*。 
+
+
+| 3 | `/4.1/vm/backups/{backupId}/
+snapshotlocations` | `Get snapshot locations`获取指定备份的快照的位置。传递步骤 2 中的 *backupId*。注意*snapshotLocationsList*信息。 
+
+
+| 4 | `/4.1/vm/{moref}/backups/
+vmdklocations` | `Get Vmdk Locations`获取指定 VM 的 VMDK 列表。注意*vmdkLocationsList*信息。 
+
+
+| 5 | `/4.1/vm/{ moref}/backups/
+{backupId}/
+availabledatastores` | `Get Available Datastores`获取可用于恢复操作的数据存储列表。传递步骤 1 中的 *moref*。传递步骤 2 中的 *backupId*。注意*DatastoreNameList*信息。 
+
+
+| 6 | `/4.1/vm/{moref}/backups/
+availableesxhosts` | `Get available ESX Hosts`获取存储备份的主机的信息。传递步骤 1 中的 *moref*。注意*availableEsxHostsList*信息。 
+
+
+| 7 | `/4.1/vm/{moref}/backups/
+{backupId}/restorevmdks`  a| 
+`Restore a VMDK from a backup`从指定的备份恢复指定的 VMDK。在 *esxHost* 属性中，传递步骤 6 中 *availableEsxHostsList* 的信息。将步骤 3 至 5 中的信息传递给 *vmdkRestoreLocations* 属性：
+
+* 在 restoreFromLocation 属性中，传递步骤 3 中来自 snapshotLocationsList 的信息。
+* 在 vmdkToRestore 属性中，传递步骤 4 中 vmdkLocationsList 中的信息。
+* 在 restoreToDatastore 属性中，传递步骤 5 中 DatastoreNameList 中的信息。
+
+
+|===

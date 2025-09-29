@@ -1,0 +1,41 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_back_up_the_snapcenter_plug-in_for_vmware_vsphere_mysql_database.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphere包含一个 MySQL 数据库（也称为 NSM 数据库），其中包含该插件执行的所有作业的元数据。您应该定期备份此存储库。 
+---
+= 备份SnapCenter Plug-in for VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphere包含一个 MySQL 数据库（也称为 NSM 数据库），其中包含该插件执行的所有作业的元数据。您应该定期备份此存储库。
+
+在执行迁移或升级之前，您还应该备份存储库。
+
+.开始之前
+当按需备份作业已在运行时，请勿启动备份 MySQL 数据库的作业。
+
+.步骤
+. 从 VMware vSphere 客户端中，选择SnapCenter Plug-in for VMware vSphere所在的虚拟机。
+. 在虚拟设备的“*摘要*”选项卡中，选择“启动远程控制台*”或“启动 Web 控制台*”以打开维护控制台窗口。
++
+image:scpivs44_image21.png["维护控制台窗口"]
+
+. 从主菜单中，输入选项*1)应用程序配置。*
+. 从应用程序配置菜单中，输入选项*6) MySQL 备份和恢复。*
+. 从 MySQL 备份和恢复配置菜单中，输入选项 *1) 配置 MySQL 备份*。
+. 在提示符下，输入存储库的备份位置、要保留的备份数量以及备份开始的时间。
++
+输入后，所有输入都会被保存。当达到备份保留数时，执行新备份时将删除较旧的备份。
+
++
+
+TIP: 存储库备份名为“backup-<date>”。由于存储库恢复功能会查找“备份”前缀，因此您不应更改它。
+
+

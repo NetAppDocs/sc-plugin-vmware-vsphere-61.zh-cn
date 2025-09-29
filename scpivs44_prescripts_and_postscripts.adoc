@@ -1,0 +1,169 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_prescripts_and_postscripts.html 
+keywords:  
+summary: 您可以使用自定义处方和附言作为数据保护操作的一部分。这些脚本可以在数据保护工作之前或之后实现自动化。 
+---
+= 前言和后记
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以使用自定义处方和附言作为数据保护操作的一部分。这些脚本可以在数据保护工作之前或之后实现自动化。例如，您可以包含一个脚本，该脚本会自动通知您数据保护作业失败或警告。在设置处方和附言之前，您应该了解创建这些处方的一些要求。
+
+
+
+== 支持的脚本类型
+
+支持 Perl 和 shell 脚本。 Shell 脚本必须以 `!/bin/bash`。(`!/bin/sh`不支持。
+
+
+
+== 脚本路径位置
+
+前脚本和后脚本由适用于SnapCenter Plug-in for VMware vSphere运行。因此，脚本必须位于SnapCenter Plug-in for VMware vSphere中，并具有可执行权限。
+
+例如：* PERL 脚本路径可能是 `/support/support/script.pl`* Shell 脚本路径可能是 `/support/support/script.sh`
+
+脚本路径在执行脚本时进行验证。
+
+
+
+== 在哪里指定脚本
+
+脚本在备份策略中指定。当启动备份作业时，策略会自动将脚本与正在备份的资源关联起来。
+
+要指定多个脚本，请在每个脚本路径后按 *Enter* 键，将每个脚本列在单独的行上。不允许使用分号（;）。您可以指定多个前言和多个后记。单个脚本可以编码为前言和后记，并且可以调用其他脚本。
+
+
+
+== 脚本执行时
+
+脚本根据为 BACKUP_PHASE 设置的值执行。
+
+* 备份阶段=备份前
++
+处方在操作的 PRE_BACKUP 阶段执行。
+
+
+
+
+NOTE: 如果处方失败，备份成功完成，并发送警告消息。
+
+* BACKUP_PHASE=POST_BACKUP 或 BACKUP_PHASE=FAILED_BACKUP
++
+备份成功完成后，在操作的 POST_BACKUP 阶段执行后记；如果备份未成功完成，则在 FAILED_BACKUP 阶段执行后记。
+
+
+
+
+NOTE: 如果后记失败，则备份成功完成，并发送警告消息。
+
+检查以下内容以验证脚本值是否已填充：* 对于 PERL 脚本： `/support/support/log_env.log` * 对于 shell 脚本： `/support/support/log_file.log`
+
+
+
+== 传递给脚本的环境变量
+
+您可以在脚本中使用下表所示的环境变量。
+
+|===
+| 环境变量 | 描述 
+
+
+| `BACKUP_NAME` | 备份的名称。变量仅在后记中传递。 
+
+
+| `BACKUP_DATE` | 备份日期，格式为 `yyyymmdd`变量仅在后记中传递。 
+
+
+| `BACKUP_TIME` | 备份时间，格式为 `hhmmss`变量仅在后记中传递。 
+
+
+| `BACKUP_PHASE` | 您希望脚本运行的备份阶段。有效值为： `PRE_BACKUP, POST_BACKUP, and FAILED_BACKUP` 。在前言和后记中传递的变量。 
+
+
+| `STORAGE_SNAPSHOTS` | 备份中的存储快照的数量。变量仅在后记中传递。 
+
+
+| `STORAGE_SNAPSHOT.#` | 定义的存储快照之一，格式如下：
+`<filer>:/vol/<volume>:<ONTAP-snapshot-name>`变量仅在后记中传递。 
+
+
+| `VIRTUAL_MACHINES` | 备份中的虚拟机数量。在前言和后记中传递的变量。 
+
+
+| `VIRTUAL_MACHINE.#` | 定义的虚拟机之一，格式如下：
+`<VM name>[vertical bar]<VM UUID>[vertical bar]<power-state>[vertical bar]<VM snapshot>[vertical bar]<ip-addresses>
+<power-state> has the values POWERED_ON, POWERED_OFF, or
+SUSPENDED`
+`<VM snapshot>`具有价值观 `true`或者 `false`在前言和后记中传递的变量。 
+|===
+
+
+== 脚本超时
+
+备份脚本的超时时间为15分钟，且无法修改。
+
+
+
+== PERL 脚本示例 #1
+
+以下示例 PERL 脚本在运行备份时打印环境变量。
+
+`#!/usr/bin/perl`
+`use warnings;`
+`use strict;`
+`my $argnum;`
+`my $logfile = '/support/support/log_env.log';`
+`open (FH, '>>', $logfile) or die $!;`
+`foreach (sort keys %ENV) {`
+`print FH "$_ = $ENV{$_}\n";`
+`}`
+`print FH "=========\n";`
+`close (FH);`
+
+
+
+== PERL 脚本示例 #2
+
+以下示例打印有关备份的信息。
+
+`#!/usr/bin/perl`
+`use warnings;`
+`use strict;`
+
+`my $argnum;`
+`my $logfile = '/support/support/log_env.log';`
+`open (FH, '>>', $logfile) or die $!;`
+
+`print FH "BACKUP_PHASE is $ENV{'BACKUP_PHASE'}\n";`
+`print FH "Backup name  $ENV{'BACKUP_NAME'}\n";`
+`print FH "Virtual Machine  $ENV{'VIRTUAL_MACHINES'}\n";`
+`print FH "VIRTUAL_MACHINE # is $ENV{'VIRTUAL_MACHINE.1'}\n";`
+`print FH "BACKUP_DATE is $ENV{'BACKUP_DATE'}\n";`
+`print FH "BACKUP_TIME is $ENV{'BACKUP_TIME'}\n";`
+`print FH "STORAGE_SNAPSHOTS is $ENV{'STORAGE_SNAPSHOTS'}\n";`
+`print FH "STORAGE_SNAPSHOT # is $ENV{'STORAGE_SNAPSHOT.1'}\n";`
+
+`print FH "PWD is $ENV{'PWD'}\n";`
+`print FH "INVOCATION_ID is $ENV{'INVOCATION_ID'}\n";`
+
+`print FH "=========\n";`
+`close (FH);`
+
+
+
+== 示例 shell 脚本
+
+
+`===============================================`
+`#!/bin/bash`
+`echo Stage $BACKUP_NAME >> /support/support/log_file.log`
+`env >> /support/support/log_file.log`
+`===============================================`

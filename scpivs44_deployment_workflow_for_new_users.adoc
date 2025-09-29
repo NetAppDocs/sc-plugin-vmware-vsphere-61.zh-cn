@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_deployment_workflow_for_new_users.html 
+keywords:  
+summary: 如果您以前没有使用过SnapCenter并且没有任何SnapCenter备份，则可以使用此工作流程。 
+---
+= 新用户的部署工作流程
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+如果您以前没有使用过SnapCenter并且没有任何SnapCenter备份，请使用以下工作流程开始。
+
+image:scpivs44_image2.png["新用户的部署工作流程"]

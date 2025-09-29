@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_enable_ssh.html 
+keywords:  
+summary: 部署SnapCenter Plug-in for VMware vSphere时，默认情况下禁用 SSH。 
+---
+= SnapCenter Plug-in for VMware vSphere启用 SSH
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+部署SnapCenter Plug-in for VMware vSphere时，默认情况下禁用 SSH。
+
+.步骤
+. 从 VMware vSphere 客户端中，选择SnapCenter Plug-in for VMware vSphere所在的虚拟机。
+. 在虚拟设备的“*摘要*”选项卡中，选择“启动远程控制台*”以打开维护控制台窗口，然后登录。
++
+有关访问和登录维护控制台的信息，请参阅link:scpivs44_access_the_maintenance_console.html["访问维护控制台"^]。
+
++
+image:scpivs44_image11.png["维护控制台窗口"]
+
+. 从主菜单中，选择菜单选项*2)系统配置*。
+. 从系统配置菜单中，选择菜单选项*6)启用 SSH 访问*，然后在确认提示符下输入“*y*”。
+. 等待消息“启用 SSH 访问...”然后按 *Enter* 继续，然后在提示符下输入 *X* 退出维护模式。
+

@@ -1,0 +1,221 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_deployment_planning_and_requirements.html 
+keywords:  
+summary: 在部署虚拟设备之前，您应该了解部署要求。 
+---
+= 部署规划和要求
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+在开始部署SnapCenter Plug-in for VMware vSphere之前，您应该熟悉以下要求。
+
+
+
+== 主机要求
+
+在开始部署SnapCenter Plug-in for VMware vSphere之前，您应该熟悉主机要求。
+
+* SnapCenter Plug-in for VMware vSphere无论用于保护 Windows 还是 Linux 系统上的数据，都部署为 Linux VM。
+* 您应该在 vCenter Server 上部署SnapCenter Plug-in for VMware vSphere。
++
+备份计划在部署SnapCenter Plug-in for VMware vSphere的时区中执行，并且 vCenter 在其所在的时区中报告数据。因此，如果SnapCenter Plug-in for VMware vSphere和 vCenter 位于不同的时区，SnapCenter Plug-in for VMware vSphere仪表板中的数据可能与报告中的数据不同。
+
+* 您不能将适用SnapCenter Plug-in for VMware vSphere在名称包含特殊字符的文件夹中。
++
+文件夹名称不应包含以下特殊字符：$!@#%^&()_+{}';.,*?"<>|
+
+* 您必须为每个 vCenter Server 部署并注册一个单独的、唯一的SnapCenter Plug-in for VMware vSphere实例。
++
+** 每个 vCenter Server（无论是否处于链接模式）都必须与SnapCenter Plug-in for VMware vSphere的单独实例配对。
+** SnapCenter Plug-in for VMware vSphere的每个实例都必须部署为单独的 Linux VM。
++
+例如，假设您要从 vCenter Server 的六个不同实例执行备份。在这种情况下，您必须在六台主机上部署SnapCenter Plug-in for VMware vSphere，并且每个 vCenter Server 必须与SnapCenter Plug-in for VMware vSphere的唯一实例配对。
+
+
+
+* 要保护 vVol VM（VMware vVol 数据存储上的 VM），您必须首先部署ONTAP tools for VMware vSphere。  ONTAP工具在ONTAP和 VMware Web 客户端上为vVols提供和配置存储。
++
+有关更多信息，请参阅适用ONTAP tools for VMware vSphere文档。此外，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]有关ONTAP工具支持的版本的最新信息。
+
+* 由于虚拟机在支持 Storage vMotion 方面存在限制，因此适用SnapCenter Plug-in for VMware vSphere对共享 PCI 或 PCIe 设备（例如NVIDIA Grid GPU）的支持有限。有关详细信息，请参阅供应商的文档《VMware 部署指南》。
++
+** 支持的内容：
++
+创建资源组
+
++
+创建不具有虚拟机一致性的备份
+
++
+当所有 VMDK 都在 NFS 数据存储上且插件不需要使用 Storage vMotion 时还原完整的 VM
+
++
+连接和分离 VMDK
+
++
+挂载和卸载数据存储
+
++
+访客文件恢复
+
+** 不支持的内容：
++
+创建具有虚拟机一致性的备份
+
++
+当 VMFS 数据存储上有一个或多个 VMDK 时，还原完整的 VM。
+
+
+
+* 有关SnapCenter Plug-in for VMware vSphere限制的详细列表，请参阅link:scpivs44_release_notes.html["SnapCenter Plug-in for VMware vSphere发行说明"^]。
+
+
+
+
+== 许可证要求
+
+|===
+| 您必须提供以下许可证…… | 许可证要求 
+
+
+| ONTAP | 其中之一： SnapMirror或SnapVault （用于二级数据保护，无论关系类型如何） 
+
+
+| 其他产品 | vSphere Standard、Enterprise 或 Enterprise Plus 使用 Storage vMotion 执行还原操作需要 vSphere 许可证。vSphere Essentials 或 Essentials Plus 许可证不包含 Storage vMotion。 
+
+
+| 主要目的地 | SnapCenter Standard：需要通过 VMware 执行基于应用程序的保护SnapRestore：仅需要对 VMware 虚拟机和数据存储区执行恢复操作FlexClone：仅用于在 VMware 虚拟机和数据存储区上执行挂载和连接操作 
+
+
+| 次要目的地 | SnapCenter标准版：用于通过 VMware FlexClone进行基于应用程序的保护的故障转移操作：仅用于 VMware VM 和数据存储区的挂载和连接操作 
+|===
+
+
+== 软件支持
+
+|===
+| 物品 | 支持的版本 
+
+
+| vCenter vSphere | 7.0U1 及以上版本。 
+
+
+| ESXi 服务器 | 7.0U1 及以上版本。 
+
+
+| IP 地址 | IPv4、IPv6 
+
+
+| VMware TLS | 1.2、1.3 
+
+
+| SnapCenter服务器上的 TLS | 1.2、1.3 SnapCenter服务器使用它与SnapCenter Plug-in for VMware vSphere进行通信，以便通过 VMDK 数据保护操作进行应用程序。 
+
+
+| VMware 应用程序 vStorage API 用于阵列集成 (VAAI) | SnapCenter Plug-in for VMware vSphere使用此方法提高还原操作的性能。它还提高了 NFS 环境中的性能。 
+
+
+| 适用于 VMware 的ONTAP工具 | SnapCenter Plug-in for VMware vSphere使用它来管理 vVol 数据存储（VMware 虚拟卷）。有关支持的版本，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]。 
+|===
+有关受支持版本的最新信息，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]。
+
+
+
+==== NVMe over TCP 和 NVMe over FC 协议的要求
+
+NVMe over TCP 和 NVMe over FC 协议支持的最低软件要求是：
+
+* vCenter vSphere 7.0U3
+* ESXi 7.0U3
+* ONTAP 9.10.1
+
+
+
+
+== 空间、大小和扩展要求
+
+|===
+| 物品 | 要求 
+
+
+| 建议的 CPU 数量 | 8 核 
+
+
+| 建议的 RAM | 24 GB 
+
+
+| SnapCenter Plug-in for VMware vSphere）、日志和 MySQL 数据库的最小硬盘空间 | 100 GB 
+
+
+| 设备中 vmcontrol 服务的最大堆大小 | 8 GB 
+|===
+
+
+== 连接和端口要求
+
+|===
+| 端口类型 | 预配置端口 
+
+
+| VMware ESXi 服务器端口 | 443 (HTTPS)，双向客户文件还原功能使用此端口。 
+
+
+| SnapCenter Plug-in for VMware vSphere  a| 
+8144（HTTPS），双向该端口用于 VMware vSphere 客户端和SnapCenter服务器之间的通信。  8080 双向 此端口用于管理虚拟设备。
+
+注意：支持将 SCV 主机添加到SnapCenter 的自定义端口。
+
+
+
+| VMware vSphere vCenter Server 端口 | 如果您要保护 vVol VM，则必须使用端口 443。 
+
+
+| 存储集群或存储虚拟机端口 | 443（HTTPS），双向 80（HTTP），双向 该端口用于虚拟设备与存储虚拟机或包含存储虚拟机的集群之间的通信。 
+|===
+
+
+== 支持的配置
+
+每个插件实例仅支持一个 vCenter Server，该 vCenter Server 处于链接模式。但是，多个插件实例可以支持同一个SnapCenter服务器，如下图所示。
+
+image:scpivs44_image4.png["支持的配置图形表示"]
+
+
+
+== 需要 RBAC 权限
+
+vCenter 管理员帐户必须具有下表列出的所需 vCenter 权限。
+
+|===
+| 要执行此操作... | 您必须拥有这些 vCenter 权限... 
+
+
+| 在 vCenter 中部署并注册SnapCenter Plug-in for VMware vSphere | 扩展：注册扩展 
+
+
+| 升级或删除SnapCenter Plug-in for VMware vSphere  a| 
+扩展
+
+* 更新扩展
+* 取消注册扩展
+
+
+
+
+| 允许在SnapCenter中注册的 vCenter Credential 用户帐户验证用户对SnapCenter Plug-in for VMware vSphere的访问权限 | 会话.验证.会话 
+
+
+| 允许用户访问适用SnapCenter Plug-in for VMware vSphere | SCV 管理员 SCV 备份 SCV 客户文件恢复 SCV 恢复 SCV 视图 必须在 vCenter 根目录分配权限。 
+|===
+
+
+== AutoSupport
+
+SnapCenter Plug-in for VMware vSphere提供了用于跟踪其使用情况的最低限度的信息，包括插件 URL。  AutoSupport包含一个由AutoSupport查看器显示的已安装插件表。

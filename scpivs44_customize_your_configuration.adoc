@@ -1,0 +1,256 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_customize_your_configuration.html 
+keywords:  
+summary: 为了提高运行效率，可以修改scbr.override配置文件来改变默认值。这些值控制设置，例如备份期间创建或删除的 VMware 快照的数量或备份脚本停止运行之前的时间量。 
+---
+= 自定义您的配置
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+为了提高操作效率，您可以修改 `scbr.override`配置文件来更改默认值。这些值控制设置，例如备份期间创建或删除的 VMware 快照的数量或备份脚本停止运行之前的时间量。
+
+这 `scbr.override`配置文件由支持基于SnapCenter应用程序的数据保护操作的SnapCenter Plug-in for VMware vSphere使用。如果此文件不存在，则必须从模板文件创建它。
+
+
+
+== 创建 scbr.override 配置文件
+
+. 前往 `/opt/netapp/scvservice/standalone_aegis/etc/scbr/scbr.override-template`。
+. 复制 `scbr.override-template`文件到名为 `scbr.override`在 `\opt\netapp\scvservice\standalone_aegis\etc\scbr`目录。
+
+
+
+
+== 可以覆盖的属性
+
+* 默认情况下，模板使用井号来注释配置属性。要使用属性修改配置值，必须删除 `#`人物。
+* 您必须重新启动SnapCenter Plug-in for VMware vSphere上的服务才能使更改生效。
+
+
+您可以使用 `scbr.override`配置文件来更改默认值。
+
+* *仪表板.受保护.虚拟机.计数.间隔=7*
++
+指定仪表板显示虚拟机保护状态的天数。
+
++
+默认值为“7”。
+
+* *guestFileRestore.guest.operation.interval=5*
++
+指定适用SnapCenter Plug-in for VMware vSphere监控来宾操作系统上来宾操作（联机磁盘和还原文件）完成情况的时间间隔（以秒为单位）。总等待时间由 `guestFileRestore.online.disk.timeout`和 `uestFileRestore.restore.files.timeout`。
+
++
+默认值为“5”。
+
+* *guestFileRestore.monitorInterval=30*
++
+指定SnapCenter Plug-in for VMware vSphere监控过期客户机文件还原会话的时间间隔（以分钟为单位）。任何超出配置的会话时间运行的会话都将被断开。
+
++
+默认值为“30”。
+
+* *guestFileRestore.online.disk.timeout=100*
++
+指定SnapCenter Plug-in for VMware vSphere等待来宾虚拟机上的联机磁盘操作完成的时间（以秒为单位）。请注意，在插件轮询在线磁盘操作完成之前，还需要等待 30 秒。
+
++
+默认值为“100”。
+
+* *guestFileRestore.restore.files.timeout=3600*
++
+指定SnapCenter Plug-in for VMware vSphere等待来宾虚拟机上的还原文件操作完成的时间（以秒为单位）。如果超过时间，则该过程将结束，并且该作业将被标记为失败。
+
++
+默认值为“3600”（1小时）。
+
+* *guestFileRestore.robocopy.directory.flags=/R:0 /W:0 /ZB /CopyAll /EFSRAW /A-:SH /e /NJH /NDL /NP*
++
+指定在来宾文件恢复操作期间复制目录时使用的额外 robocopy 标志。
+
++
+不要删除 `/NJH`或添加 `/NJS`因为这会破坏恢复输出的解析。
+
++
+不允许无限次重试（通过删除 `/R`标志），因为这可能会导致失败的复制无休止地重试。
+
++
+默认值为 `"/R:0 /W:0 /ZB /CopyAll /EFSRAW /A-:SH /e /NJH /NDL /NP"`。
+
+* *guestFileRestore.robocopy.file.flags=/R:0 /W:0 /ZB /CopyAll /EFSRAW /A-:SH /NJH /NDL /NP*
++
+指定在来宾文件还原操作期间复制单个文件时要使用的额外 robocopy 标志。
+
++
+不要删除 `/NJH`或添加 `/NJS`因为这会破坏恢复输出的解析。
+
++
+不允许无限次重试（通过删除 `/R`标志），因为这可能会导致失败的复制无休止地重试。
+
++
+默认值为 `"/R:0 /W:0 /ZB /CopyAll /EFSRAW /A-:SH /NJH /NDL /NP"`。
+
+* *guestFileRestore.sessionTime=1440*
++
+指定适用SnapCenter Plug-in for VMware vSphere保持客户文件还原会话处于活动状态的时间（以分钟为单位）。
+
++
+默认值为“1440”（24 小时）。
+
+* *guestFileRestore.使用.自定义.在线.磁盘.脚本=true*
++
+指定在创建来宾文件还原会话时是否使用自定义脚本来联机磁盘并检索驱动器号。该脚本必须位于 `[Install Path]  \etc\guestFileRestore_onlineDisk.ps1`。安装时会提供默认脚本。价值观 `[Disk_Serial_Number]`， `[Online_Disk_Output]` ， 和 `[Drive_Output]`在附加过程中在脚本中被替换。
+
++
+默认值为“false”。
+
+* *包括.esx.启动器.id.来自.集群=真*
++
+指定适用SnapCenter Plug-in for VMware vSphere应在通过 VMDK 工作流的应用程序中包含来自集群中所有 ESXi 主机的 iSCSI 和 FCP 启动器 ID。
+
++
+默认值为“false”。
+
+* *最大并发数=15*
++
+指定适用SnapCenter Plug-in for VMware vSphere可以向SnapCenter服务器发出的最大并发调用数，以发现数据存储区的存储空间。当您在SnapCenter Plug-in for VMware vSphere上重新启动 Linux 服务时，插件会进行这些调用。
+
+* *nfs.datastore.mount.重试.计数=3*
++
+指定SnapCenter Plug-in for VMware vSphere尝试在 vCenter 中将卷作为 NFS 数据存储区挂载的最大次数。
+
++
+默认值为“3”。
+
+* *nfs.datastore.mount.重试.延迟=60000*
++
+指定SnapCenter Plug-in for VMware vSphere在 vCenter 中尝试将卷挂载为 NFS 数据存储区之间等待的时间（以毫秒为单位）。
+
++
+默认值为“60000”（60 秒）。
+
+* *script.virtual.machine.count.variable.name=虚拟机器*
++
+指定包含虚拟机数量的环境变量名称。在备份作业期间执行任何用户定义的脚本之前，必须定义变量。
+
++
+例如，VIRTUAL_MACHINES=2 表示正在备份两台虚拟机。
+
+* *script.virtual.machine.info.variable.name=虚拟机器.%s*
++
+提供包含有关备份中第 n 个虚拟机的信息的环境变量的名称。在备份期间执行任何用户定义的脚本之前，必须设置此变量。
+
++
+例如，环境变量 VIRTUAL_MACHINE.2 提供有关备份中第二台虚拟机的信息。
+
+* *script.virtual.machine.info.format= %s|%s|%s|%s|%s*
++
+提供有关虚拟机的信息。该信息的格式在环境变量中设置，如下所示： `VM name|VM UUID| VM power state (on|off)|VM snapshot taken (true|false)|IP address(es)`
+
++
+以下是您可能提供的信息的示例：
+
++
+`VIRTUAL_MACHINE.2=VM 1|564d6769-f07d-6e3b-68b1f3c29ba03a9a|POWERED_ON||true|10.0.4.2`
+
+* *存储.连接.超时=600000*
++
+指定SnapCenter服务器等待存储系统响应的时间（以毫秒为单位）。
+
++
+默认值为“600000”（10分钟）。
+
+* *vmware.esx.ip.kernel.ip.映射*
++
+无默认值。使用此值将 ESXi IP 地址映射到 VMkernel IP 地址。默认情况下，适用SnapCenter Plug-in for VMware vSphere使用 ESXi 主机的管理 VMkernel 适配器 IP 地址。如果您希望SnapCenter Plug-in for VMware vSphere使用不同的 VMkernel 适配器 IP 地址，则必须提供覆盖值。
+
++
+在以下示例中，管理 VMkernel 适配器 IP 地址为 10.225.10.56；但是，SnapCenter Plug-in for VMware vSphere使用指定的地址 10.225.11.57 和 10.225.11.58。如果管理 VMkernel 适配器 IP 地址为 10.225.10.60，则插件使用地址 10.225.11.61。
+
++
+`vmware.esx.ip.kernel.ip.map=10.225.10.56:10.225.11.57,10.225.11.58; 10.225.10.60:10.225.11.61`
+
+* *vmware.max.concurrent.snapshots=30*
++
+指定SnapCenter Plug-in for VMware vSphere在服务器上执行的并发 VMware 快照的最大数量。
+
++
+此数字是根据每个数据存储进行检查的，并且仅在策略选择了“VM 一致”时才进行检查。如果您正在执行崩溃一致性备份，则此设置不适用。
+
++
+默认值为“30”。
+
+* *vmware.max.concurrent.snapshots.delete=30*
++
+指定适用SnapCenter Plug-in for VMware vSphere在服务器上执行的每个数据存储区的最大并发 VMware 快照删除操作数。
+
++
+此数字是根据每个数据存储区进行检查的。
+
++
+默认值为“30”。
+
+* *vmware.query.unresolved.retry.count=10*
++
+指定SnapCenter Plug-in for VMware vSphere因“... 延迟 I/O 的时间限制...”错误而重试发送有关未解析卷的查询的最大次数。
+
++
+默认值为“10”。
+
+* *vmware.quiesce.retry.count=0*
++
+指定SnapCenter Plug-in for VMware vSphere在备份期间由于“... 延迟 I/O 的时间限制...”错误而重试发送有关 VMware 快照的查询的最大次数。
+
++
+默认值为“0”。
+
+* *vmware.quiesce.retry.interval=5*
++
+指定SnapCenter Plug-in for VMware vSphere在备份期间发送有关 VMware 快照“... 延迟 I/O 的时间限制...”错误的查询之间等待的时间（以秒为单位）。
+
++
+默认值为“5”。
+
+* *vmware.query.unresolved.retry.delay=60000*
++
+指定SnapCenter Plug-in for VMware vSphere在发送有关未解析卷的查询之间等待的时间（以毫秒为单位），因为出现“... 延迟 I/O 的时间限制...”错误。克隆 VMFS 数据存储时发生此错误。
+
++
+默认值为“60000”（60 秒）。
+
+* *vmware.reconfig.vm.重试.计数=10*
++
+指定SnapCenter Plug-in for VMware vSphere由于“... 延迟 I/O 的时间限制...”错误而重试发送有关重新配置虚拟机的查询的最大次数。
+
++
+默认值为“10”。
+
+* *vmware.reconfig.vm.retry.delay=30000*
++
+指定SnapCenter Plug-in for VMware vSphere在发送有关重新配置虚拟机的查询之间等待的最长时间（以毫秒为单位），因为“... 延迟 I/O 的时间限制...”错误。
+
++
+默认值为“30000”（30 秒）。
+
+* *vmware.rescan.hba.重试.计数=3*
++
+指定SnapCenter Plug-in for VMware vSphere在发送有关重新扫描主机总线适配器的查询之间等待的时间（以毫秒为单位），因为出现“... 延迟 I/O 的时间限制...”错误。
+
++
+默认值为“3”。
+
+* *vmware.rescan.hba.重试.延迟=30000*
++
+指定SnapCenter Plug-in for VMware vSphere重试重新扫描主机总线适配器的请求的最大次数。
+
++
+默认值为“30000”。
+
+

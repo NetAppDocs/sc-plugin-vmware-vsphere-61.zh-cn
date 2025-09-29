@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_role_based_access_control.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphere为管理虚拟化资源提供了额外的 RBAC 级别。该插件支持 vCenter Server RBAC 和ONTAP RBAC。 
+---
+= 基于角色的访问控制（RBAC）
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+SnapCenter Plug-in for VMware vSphere为管理虚拟化资源提供了额外的 RBAC 级别。该插件支持 vCenter Server RBAC 和ONTAP RBAC。
+
+SnapCenter和ONTAP RBAC 仅适用于SnapCenter Server 应用程序一致（通过 VMDK 的应用程序）作业。如果您使用适用SnapCenter Plug-in for VMware vSphere来支持SnapCenter应用程序一致性作业，则必须分配 SnapCenterAdmin 角色；您无法更改 SnapCenterAdmin 角色的权限。
+
+SnapCenter Plug-in for VMware vSphere预定义的 vCenter 角色。您必须使用 vCenter GUI 将这些角色添加到 vCenter Active Directory 用户才能执行SnapCenter操作。
+
+您可以随时创建和修改角色并为用户添加资源访问权限。但是，当您首次设置SnapCenter Plug-in for VMware vSphere时，您至少应该将 Active Directory 用户或组添加到角色，然后向这些用户或组添加资源访问权限。

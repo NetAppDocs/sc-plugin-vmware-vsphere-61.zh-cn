@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_guest_file_restore_scenarios_you_might_encounter.html 
+keywords:  
+summary: 尝试恢复客户机文件时，您可能会遇到客户机文件恢复会话为空白、客户机文件恢复附加磁盘操作失败或客户机文件恢复会话停止后备份未分离的情况。 
+---
+= 您可能会遇到的来宾文件还原场景
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+尝试恢复访客文件时，您可能会遇到以下任一情况。
+
+
+
+== 来宾文件恢复会话为空白
+
+当您创建客户文件还原会话并且当该会话处于活动状态时，客户操作系统重新启动，就会出现此问题。发生这种情况时，客户操作系统中的 VMDK 可能会保持离线状态。因此，当您尝试浏览来宾文件恢复会话时，列表为空白。
+
+要解决此问题，请在客户操作系统中手动将 VMDK 重新置于联机状态。当 VMDK 在线时，来宾文件恢复会话将显示正确的内容。
+
+
+
+== 来宾文件恢复附加磁盘操作失败
+
+当您启动客户机文件还原操作时会出现此问题，但即使 VMware 工具正在运行且客户机操作系统凭据正确，连接磁盘操作也会失败。如果发生这种情况，将返回以下错误：
+
+`Error while validating guest credentials, failed to access guest system using specified credentials: Verify VMWare tools is running properly on system and account used is Administrator account, Error is SystemError vix error codes = (3016, 0).`
+
+要解决此问题，请在客户机操作系统上重新启动 VMware Tools Windows 服务，然后重试客户机文件还原操作。
+
+
+
+== 来宾电子邮件显示文件名为 ??????
+
+当您使用来宾文件还原功能还原名称中含有非英文字符的文件或文件夹时，电子邮件通知会显示还原的文件名为“??????”，这时就会出现此问题。电子邮件附件正确列出了已恢复的文件和文件夹的名称。
+
+
+
+== 来宾文件恢复会话停止后，备份不会分离
+
+当您从 VM 一致的备份执行来宾文件还原操作时会出现此问题。当来宾文件恢复会话处于活动状态时，将对同一 VM 执行另一个 VM 一致性备份。当客户文件恢复会话断开时（手动或 24 小时后自动断开），该会话的备份不会被分离。
+
+要解决此问题，请手动分离从活动来宾文件还原会话附加的 VMDK。

@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_extend_the_time_of_a_guest_file_restore_session.html 
+keywords:  
+summary: 默认情况下，附加的 Guest File Restore VMDK 可用 24 小时，然后自动分离。您可以在访客配置页面中延长时间。 
+---
+= 延长来宾文件恢复会话的时间
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+默认情况下，附加的 Guest File Restore VMDK 可用 24 小时，然后自动分离。您可以在*访客配置*页面中延长时间。
+
+.关于此任务
+如果您想要稍后从附加的 VMDK 恢复其他文件或文件夹，则可能需要延长客户文件恢复会话。但是，由于来宾文件恢复会话使用大量资源，因此应仅偶尔延长会话时间。
+
+.步骤
+. 在 VMware vSphere 客户端中，选择 *Guest File Restore*。
+. 选择一个来宾文件恢复会话，然后选择来宾会话监视器标题栏中的“延长选定来宾会话”图标。
++
+会议又延长了24小时。
+
+

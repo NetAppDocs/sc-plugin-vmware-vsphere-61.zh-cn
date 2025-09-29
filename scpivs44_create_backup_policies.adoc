@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_create_backup_policies.html 
+keywords:  
+summary:  
+---
+= 创建备份策略
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+按照以下说明创建备份策略
+
+. 在 SCV 插件的左侧导航窗格中，选择 *Policies*，然后选择 *New Policy*。
+. 在*新建备份策略*页面，输入策略配置信息，然后选择*添加*。
+

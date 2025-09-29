@@ -1,0 +1,48 @@
+---
+sidebar: sidebar 
+permalink: scpivs48_rest_apis_audit_logs.html 
+keywords:  
+summary: 用于生成审计日志的 REST API 
+---
+= 用于生成审计日志的 REST API
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以从 swagger rest API 以及 SCV 插件用户界面收集审计日志详细信息。
+
+下面给出了 Swagger Rest API：
+
+. GET 4.1/audit/logs：获取所有日志的审计数据
+. GET 4.1/audit/logs/{filename}：获取特定日志文件的审计数据
+. POST 4.1/audit/verify：触发审计日志验证。
+. GET 4.1/audit/config：获取审计和系统日志服务器配置
+. PUT 4.1/audit/config：更新审计和系统日志服务器配置
+
+
+要使用适用于 VMware vSphere REST API的 SnapCenter Plug-in for VMware vSphere客户端作业生成审核日志，您必须使用适用于 VMware vSphere 的 REST API 调用。
+
+对于每个 REST API，添加 `\https://<server>:<port>/api`在 REST API 的前面形成一个完整的端点。
+
+使用“作业”部分中的以下 REST API 来获取有关作业的详细信息：
+
+|===
+| REST API | 注释 
+
+
+| `4.1/audit/logs` | 返回包含完整性数据的审计日志文件 
+
+
+| `4.1/audit/logs/{filename}` | 获取具有完整性数据的特定审计日志文件 
+
+
+| `4.1/audit/verify` | 触发审计验证 
+
+
+| `4.1/audit/syslogcert` | 更新 syslog 服务器证书 
+|===

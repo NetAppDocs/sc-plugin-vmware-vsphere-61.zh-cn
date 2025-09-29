@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_add_a_single_vm_or_datastore_to_a_resource_group.html 
+keywords:  
+summary: 您可以快速将单个虚拟机或数据存储区添加到由SnapCenter Plug-in for VMware vSphere管理的任何现有资源组。 
+---
+= 将单个虚拟机或数据存储添加到资源组
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以快速将单个虚拟机或数据存储区添加到由SnapCenter Plug-in for VMware vSphere管理的任何现有资源组。
+
+.关于此任务
+您可以添加 SAN 和 NAS 数据存储，但不能添加 VSAN 或 VVOL 数据存储。
+
+.步骤
+. 在 vSphere 客户端 GUI 中，选择工具栏中的 *菜单*，然后导航到要添加的 VM 或数据存储。
+. 在左侧导航窗格中，右键单击虚拟机或数据存储，从辅助下拉列表中选择* SnapCenter Plug-in for VMware vSphere* > *添加到资源组*。
++
+系统首先检查SnapCenter是否管理所选 VM 所在的存储系统并与之兼容，然后显示“添加到资源组”页面。如果消息 `SnapCenter Compatibility Error`显示，则所选 VM 与SnapCenter不兼容，您必须先将适当的存储 VM 添加到SnapCenter。
+
+. 在“添加到资源组”页面中，选择一个资源组，然后选择“确定”。
++
+当您选择“*确定*”时，系统首先检查SnapCenter是否管理所选虚拟机或数据存储所在的存储并与其兼容。
+
++
+如果消息 `Selected <resource-name> is not SnapCenter compatible`则表示所选的虚拟机或数据存储与SnapCenter不兼容。请参阅link:scpivs44_create_resource_groups_for_vms_and_datastores.html#manage-compatibility-check-failures["管理兼容性检查失败"]了解更多信息。
+
+

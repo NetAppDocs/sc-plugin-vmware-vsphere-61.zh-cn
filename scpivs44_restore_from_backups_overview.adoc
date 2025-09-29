@@ -1,0 +1,47 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_restore_from_backups_overview.html 
+keywords:  
+summary: 您可以从主备份或辅助备份恢复虚拟机、VMDK、文件和文件夹。 
+---
+= 恢复概述
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以从主备份或辅助备份恢复虚拟机、VMDK、文件和文件夹。
+
+* 虚拟机还原目标
++
+您可以将传统虚拟机还原到原始主机，或还原到同一 vCenter Server 中的备用主机，或还原到由同一 vCenter 或链接模式下的任何 vCenter 管理的备用 ESXi 主机。
+
++
+您可以将 vVol VM 还原到原始主机。
+
+* VMDK 恢复目标
++
+您可以将传统虚拟机中的 VMDK 恢复到原始数据存储或备用数据存储。
+
++
+您可以将 vVol VM 中的 VMDK 恢复到原始数据存储。
+
+
+
+您还可以在来宾文件还原会话中还原单个文件和文件夹，该会话附加虚拟磁盘的备份副本，然后还原选定的文件或文件夹。
+
+您无法恢复以下内容：
+
+* 数据存储库
++
+您不能使用SnapCenter Plug-in for VMware vSphere来还原数据存储区，而只能还原数据存储区中的各个虚拟机。
+
+* 已移除虚拟机的备份
++
+您无法恢复已删除的存储虚拟机的备份。例如，如果您使用管理 LIF 添加存储虚拟机，然后创建备份，然后删除该存储虚拟机并添加包含相同存储虚拟机的集群，则备份的还原操作将失败。
+
+

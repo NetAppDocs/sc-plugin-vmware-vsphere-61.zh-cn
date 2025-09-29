@@ -1,0 +1,109 @@
+---
+permalink: scv_rn_upgrade_paths.html 
+sidebar: sidebar 
+keywords: upgrade paths, scv, 6.1 
+summary: 了解适用于SnapCenter Plug-in for VMware vSphere中提供的新功能。 
+---
+= 升级路径
+:allow-uri-read: 
+
+
+[role="lead"]
+您可以升级到的适用SnapCenter Plug-in for VMware vSphere版本取决于您当前运行的版本。
+
+[NOTE]
+====
+仅 VMware vCenter Server 7 Update 1 及更高版本支持升级到SnapCenter Plug-in for VMware vSphere。对于版本 7 更新 1 之前的 VMware vCenter 服务器，您应该继续使用 SCV 4.7。
+
+====
+[cols="50%,50%"]
+|===
+| 如果您使用的是 SCV 版本…… | 您可以直接将 SCV 升级到... 
+
+
+ a| 
+SCV 6.0
+ a| 
+SCV 6.1
+
+
+
+ a| 
+SCV 5.0
+ a| 
+SCV 6.0 和 SCV 6.1
+
+
+
+ a| 
+SCV 4.9
+ a| 
+SCV 5.0 和 SCV 6.0
+
+
+
+ a| 
+SCV 4.8
+ a| 
+SCV 4.9 和 SCV 5.0
+
+
+
+ a| 
+SCV 4.7
+ a| 
+SCV 4.8 和 SCV 4.9
+
+|===
+对于与SnapCenter集成的虚拟化数据库和文件系统，升级路径如下：
+
+[cols="30%,30%,40%"]
+|===
+| 如果您正在使用 | 如果您的 VMware 插件是... | 您可以直接升级到... 
+
+
+ a| 
+SnapCenter 6.1
+ a| 
+SCV 6.0
+ a| 
+SCV 6.1
+
+
+
+ a| 
+SnapCenter 6.0
+ a| 
+SCV 5.0
+ a| 
+SCV 6.0
+
+
+
+ a| 
+SnapCenter 5.0
+ a| 
+SCV 4.9
+ a| 
+SCV 5.0
+
+
+
+ a| 
+SnapCenter 4.9
+ a| 
+SCV 4.8
+ a| 
+SCV 4.9
+
+
+
+ a| 
+SnapCenter 4.8
+ a| 
+SCV 4.7
+ a| 
+SCV 4.8
+
+|===
+有关受支持版本的最新信息，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]（IMT）。

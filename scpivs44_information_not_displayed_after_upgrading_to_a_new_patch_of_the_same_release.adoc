@@ -1,0 +1,61 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_information_not_displayed_after_upgrading_to_a_new_patch_of_the_same_release.html 
+keywords:  
+summary: 将SnapCenter Plug-in for VMware vSphere升级到同一版本的新补丁后，仪表板和作业监视器中可能不会显示最近的作业或其他信息。 
+---
+= 升级到同一版本的新补丁后不显示信息
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+将SnapCenter Plug-in for VMware vSphere升级到同一版本的新补丁后，仪表板和作业监视器中可能不会显示最近的作业或其他信息。
+
+如果要升级到同一版本的新修补程序，则必须在升级或注册之前清除 vCenter Web Server 上的SnapCenter Plug-in for VMware vSphere缓存并重新启动服务器。
+
+如果未清除插件缓存，则在以下情况下，仪表板和作业监视器中不会显示最近的作业：
+
+* 使用 vCenter 部署了SnapCenter Plug-in for VMware vSphere，然后升级到同一版本中的补丁程序。
+* SnapCenter VMware 虚拟设备部署在 vCenter 1 中。后来，此SnapCenter Plug-in for VMware vSphere被注册到新的 vCenter2。使用补丁创建了SnapCenter Plug-in for VMware vSphere的新实例，并将其注册到 vCenter1。但是，由于 vCenter1 仍然具有来自第一个未安装SnapCenter Plug-in for VMware vSphere的缓存插件，因此需要清除缓存。
+
+
+根据服务器操作系统的类型，缓存位于以下位置：
+
+* vCenter Server Linux 设备
++
+`/etc/vmware/vsphere-client/vc-packages/vsphere-client-serenity/`
+
+* Windows OS
++
+`%PROGRAMFILES%/VMware/vSphere client/vc-packages/vsphere-client-serenity/`
+
+
+
+
+
+== 如果您在清除缓存之前已经升级，请采取以下解决方法
+
+. 登录到SnapCenter Plug-in for VMware vSphere管理 GUI。
++
+部署SnapCenter Plug-in for VMware vSphere时会显示 IP 地址。
+
+. 在左侧导航窗格中选择“配置”，然后在“插件详细信息”部分中选择“服务”选项以禁用该插件。
++
+SnapCenter Plug-in for VMware vSphere已被禁用，并且扩展已在 vCenter 中取消注册。
+
+. 找到 `vsphere-client-serenity`文件夹，然后找到 `com.netapp.scv.client-<release-number>`文件夹并将其删除。
++
+文件夹名称随每个版本的发布而变化。
+
+. 重新启动 vCenter Server。
+. 登录 VMware vSphere 客户端。
+. 在左侧导航窗格中选择“配置”，然后在“插件详细信息”部分中选择“服务”选项以启用该插件。
++
+适用SnapCenter Plug-in for VMware vSphere已启用，并且扩展已在 vCenter 中注册。
+
+

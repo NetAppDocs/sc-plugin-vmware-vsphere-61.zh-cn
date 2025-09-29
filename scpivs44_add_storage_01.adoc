@@ -1,0 +1,108 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_add_storage_01.html 
+keywords:  
+summary: 添加存储使SnapCenter Plug-in for VMware vSphere能够识别和管理 vCenter 中的备份和还原操作。 
+---
+= 添加存储
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+在备份或恢复虚拟机之前，您必须添加存储集群或存储虚拟机。添加存储使SnapCenter Plug-in for VMware vSphere能够识别和管理 vCenter 中的备份和还原操作。
+
+* 使用哪个 GUI
++
+使用 VMware vSphere 客户端添加存储。
+
+* 大型 LUN
++
+SnapCenter Plug-in for VMware vSphere支持ASA聚合上高达 128 TB 的大型 LUN 上的数据存储。对于大型 LUN， SnapCenter仅支持厚配置 LUN 以避免延迟。
+
+* VMware 虚拟卷 (vVols)
++
+您必须将存储集群添加到SnapCenter Plug-in for VMware vSphere和ONTAP tools for VMware vSphere中，才能使 vVol DataProtection 正常工作。
+
++
+有关更多信息，请参阅适用ONTAP tools for VMware vSphere文档。此外，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]有关ONTAP工具支持的版本的最新信息。
+
+
+
+.开始之前
+ESXi 服务器、SnapCenter Plug-in for VMware vSphere以及每个 vCenter 必须同步到同一时间。如果您尝试添加存储但 vCenter 的时间设置不同步，则操作可能会失败并出现 Java 证书错误。
+
+.关于此任务
+SnapCenter Plug-in for VMware vSphere在直接连接的存储虚拟机和存储群集中的存储虚拟机上执行备份和还原操作。
+
+
+NOTE: 如果您使用适用SnapCenter Plug-in for VMware vSphere来支持 VMDK 上的基于应用程序的备份，则必须使用SnapCenter GUI 输入存储身份验证详细信息并注册存储系统。
+
+* 对于链接模式的 vCenter，您必须分别向每个 vCenter 添加存储系统。
+* 如果要添加 SVM，则存储 VM 的名称必须解析为管理 LIF。
++
+如果您已在SnapCenter中的 _etc\hosts_ 文件中添加了存储虚拟机名称的条目，则必须确保这些条目也可以从虚拟设备中解析。如果不是，您应该将类​​似的条目添加到设备内的 _etc/hosts_ 文件。
+
++
+如果您添加的存储虚拟机的名称无法解析为管理 LIF，则计划的备份作业将失败，因为插件无法发现该存储虚拟机上的任何数据存储库或卷。如果发生这种情况，请将存储虚拟机添加到SnapCenter并指定管理 LIF，或者添加包含存储虚拟机的集群并指定集群管理 LIF。
+
+* 存储身份验证详细信息不会在SnapCenter Plug-in for VMware vSphere的多个实例之间或 Windows SnapCenter服务器与 vCenter 上的SnapCenter插件之间共享。
+
+
+.步骤
+. 从 vCenter 客户端快捷方式页面中，选择SnapCenter Plug-in for VMware vSphere。
+. 在 SCV 的左侧导航窗格中，选择 *仪表板* > *存储系统*。
+. 在存储系统页面上，选择*添加*选项。
+. 在“添加存储系统”向导中，输入下表列出的基本存储虚拟机或集群信息：
++
+|===
+| 对于这个领域…… | 这样做… 
+
+
+| 存储系统 | 输入存储集群或存储虚拟机的 FQDN 或管理 LIF 的 IP 地址。  SnapCenter Plug-in for VMware vSphere不支持不同集群上具有相同名称的多个存储虚拟机。 
+
+
+| 身份验证方法 | 选择凭据或证书。支持两种类型的证书：- https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/How_to_configure_a_self-signed_certificate_for_storage_system_authentication_with_SCV["自签名证书"^] - https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/How_to_configure_a_CA_signed_certificate_for_storage_system_authentication_with_SCV["CA 签名证书"] 。 
+
+
+| 用户名 | 当您选择凭证作为身份验证方法时，此字段可见。输入用于登录存储虚拟机或集群的ONTAP用户名。 
+
+
+| 密码 | 当您选择凭证作为身份验证方法时，此字段可见。输入存储虚拟机或集群登录密码。 
+
+
+| 证书 | 当您选择证书作为身份验证方法时，此字段可见。浏览以选择证书文件。 
+
+
+| 专用密钥 | 当您选择证书作为身份验证方法时，此字段可见。浏览以选择私钥文件。 
+
+
+| 协议 | 选择存储协议。 
+
+
+| 端口 | 存储系统接受的端口。  - 443 用于 HTTPS 连接 - 80 用于 HTTP 连接 
+
+
+| 暂停 | 输入SnapCenter Plug-in for VMware vSphere在操作超时之前应等待的秒数。默认值为 60 秒。 
+
+
+| 首选 IP 地址 | 如果存储虚拟机具有多个管理 IP 地址，请选中此框并输入您希望SnapCenter Plug-in for VMware vSphere使用的 IP 地址。  *注意：*输入 IP 地址时请勿使用方括号（[]）。 
+
+
+| 事件管理系统 (EMS) 和AutoSupport设置 | 如果您想要将 EMS 消息发送到存储系统 syslog，或者想要将AutoSupport消息发送到存储系统以应用保护、完成还原操作或失败操作，请选中相应的复选框。选中 *向存储系统发送失败操作的AutoSupport通知* 复选框和 *将SnapCenter服务器事件记录到 syslog* 复选框以启用AutoSupport通知。 
+
+
+| 将SnapCenter服务器事件记录到 syslog | 选中该框以记录适用于SnapCenter Plug-in for VMware vSphere的事件。 
+
+
+| 向存储系统发送操作失败的AutoSupport通知 | 如果您希望在数据保护作业失败时收到AutoSupport通知，请选中此框。您还必须在存储虚拟机上启用AutoSupport并配置AutoSupport电子邮件设置。 
+|===
+. 选择“*添加*”。
++
+如果您添加了存储集群，则该集群中的所有存储虚拟机都会自动添加。自动添加的存储虚拟机（有时称为“隐式”存储虚拟机）在集群摘要页面上显示，并使用连字符 (-) 而不是用户名。仅针对明确的存储实体显示用户名。
+
+

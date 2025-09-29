@@ -1,0 +1,30 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_log_in_to_the_snapcenter_vmware_vsphere_web_client.html 
+keywords:  
+summary: 部署SnapCenter Plug-in for VMware vSphere时，它会在 vCenter 上安装一个 VMware vSphere 客户端，该客户端与其他 vSphere 客户端一起显示在 vCenter 屏幕上。 
+---
+= 登录到SnapCenter VMware vSphere 客户端
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+部署SnapCenter Plug-in for VMware vSphere时，它会在 vCenter 上安装一个 VMware vSphere 客户端，该客户端与其他 vSphere 客户端一起显示在 vCenter 屏幕上。
+
+.开始之前
+必须在 vCenter 中启用传输层安全性 (TLS)。请参阅 VMware 文档。
+
+.步骤
+. 在浏览器中，导航到 VMware vSphere vCenter。
+. 登录到*VMware vCenter Single Sign-On*页面。
++
+
+IMPORTANT: 选择*登录*按钮。由于已知的 VMware 问题，请勿使用 ENTER 键登录。有关详细信息，请参阅有关 ESXi Embedded Host Client 问题的 VMware 文档。
+
+. 在 *VMware vSphere 客户端* 页面上，选择工具栏中的菜单，然后选择 * SnapCenter Plug-in for VMware vSphere*。
+

@@ -1,0 +1,29 @@
+---
+sidebar: sidebar 
+permalink: scv48_add_certificates_to_certificate_store.html 
+keywords:  
+summary: 将证书颁发机构的根证书和中间证书添加到 VMware vCenter，以信任该证书和使用该证书签名的工件。 
+---
+= 将证书添加到 VMware 证书存储
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+在安装开放虚拟设备 (OVA) 之前，请将证书添加到 vCenter。  .tar 文件包含 OVA 和 Entrust Root 和中间证书，这些证书可以在证书文件夹中找到。  VMware vCenter 7u1 及更高版本支持 OVA 部署。
+
+在 VMware vCenter 7.0.3 及更高版本中，Entrust 证书签名的 OVA 不再受信任。您需要执行以下步骤来解决该问题。
+
+.步骤
+. 使用 vSphere Client 登录到 vCenter Server。
+. 导航到*管理>证书>证书管理*。
+. 在“受信任的根存储”旁边，选择“添加”
+. 浏览并选择 Entrust Root 和中间证书的位置。该证书被添加到“*受信任的根证书*”下的面板中。一旦安装了证书，就可以验证和部署 OVA。
+
+
+
+NOTE: 如果下载的 OVA 没有被篡改，则 *Publisher* 列显示 *Trusted certificate*。

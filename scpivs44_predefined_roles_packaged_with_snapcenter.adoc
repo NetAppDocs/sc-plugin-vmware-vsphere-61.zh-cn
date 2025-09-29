@@ -1,0 +1,44 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_predefined_roles_packaged_with_snapcenter.html 
+keywords:  
+summary: 为了简化使用 vCenter Server RBAC 的操作，SnapCenter Plug-in for VMware vSphere提供了一组预定义角色，使用户能够执行SnapCenter任务。还有一个只读角色，允许用户查看SnapCenter信息，但不能执行任何任务。 
+---
+= SnapCenter Plug-in for VMware vSphere附带的预定义角色
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+为了简化使用 vCenter Server RBAC 的操作，SnapCenter Plug-in for VMware vSphere提供了一组预定义角色，使用户能够执行SnapCenter任务。还有一个只读角色，允许用户查看SnapCenter信息，但不能执行任何任务。
+
+预定义角色既具有所需的SnapCenter特定权限，又具有本机 vCenter Server 权限，以确保任务正确完成。此外，角色设置为在所有受支持的 vCenter Server 版本中拥有必要的权限。
+
+作为管理员，您可以将这些角色分配给适当的用户。
+
+每次重新启动 vCenter Web 客户端服务或修改安装时，SnapCenter Plug-in for VMware vSphere将这些角色恢复为其默认值（初始权限集）。如果升级SnapCenter Plug-in for VMware vSphere，则预定义角色将自动升级以与该版本的插件一起使用。
+
+您可以通过选择“菜单”>“管理”>“角色”在 vCenter GUI 中查看预定义的角色，如下表所示。
+
+|===
+| 角色 | 描述 
+
+
+| SCV 管理员 | 提供执行所有适用SnapCenter Plug-in for VMware vSphere任务所需的所有本机 vCenter Server 和SnapCenter特定权限。从 SCV 6.1 版本开始，该角色添加了创建二级保护的新权限。 
+
+
+| SCV备份 | 提供备份 vSphere 对象（虚拟机和数据存储区）所需的所有本机 vCenter Server 和SnapCenter特定权限。用户还具有配置权限。用户无法恢复备份。从 SCV 6.1 版本开始，该角色添加了创建二级保护的新权限。 
+
+
+| SCV 来宾文件还原 | 提供还原客户文件和文件夹所需的所有本机 vCenter Server 和SnapCenter特定权限。用户无法恢复虚拟机或 VMDK。 
+
+
+| SCV 还原 | 提供还原使用适用于SnapCenter Plug-in for VMware vSphere的vSphere 对象以及还原来宾文件和文件夹所需的所有本机 vCenter Server 和SnapCenter特定权限。用户还具有配置权限。用户无法备份 vSphere 对象。 
+
+
+| SCV 视图 | 提供SnapCenter Plug-in for VMware vSphere的只读访问权限。 
+|===

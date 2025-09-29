@@ -1,0 +1,24 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_licensing.html 
+keywords:  
+summary: 本节提供适用于SnapCenter Plug-in for VMware vSphere的许可信息。 
+---
+= 许可
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+如果您使用以下存储系统，SnapCenter Plug-in for VMware vSphere是免费产品：
+
+* 本地ONTAP集群（FAS、 AFF和ASA系统）
+* Cloud Volumes ONTAP
+* ONTAP Select
+
+
+建议（但不要求）将SnapCenter标准许可证添加到辅助目标。如果辅助系统上未启用SnapCenter标准许可证，则执行故障转移操作后无法使用SnapCenter 。但是，执行挂载和连接操作需要二级存储上的FlexClone许可证。执行恢复操作需要SnapRestore许可证。

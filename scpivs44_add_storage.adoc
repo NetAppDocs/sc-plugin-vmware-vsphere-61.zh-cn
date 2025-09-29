@@ -1,0 +1,21 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_add_storage.html 
+keywords:  
+summary:  
+---
+= 添加存储
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+按照本节中的步骤添加存储。
+
+. 在 SCV 插件的左侧导航窗格中，选择 *存储系统*，然后选择 *添加* 选项。
+. 在添加存储系统对话框中，输入基本 SVM 或集群信息，然后选择*添加*。
+

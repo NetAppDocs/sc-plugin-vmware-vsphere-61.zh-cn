@@ -1,0 +1,66 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_minimum_vcenter_privileges_required.html 
+keywords:  
+summary: 在开始部署SnapCenter Plug-in for VMware vSphere之前，您应该确保您拥有所需的最低 vCenter 权限。 
+---
+= 所需的最低 vCenter 权限
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+在开始部署SnapCenter Plug-in for VMware vSphere之前，您应该确保您拥有所需的最低 vCenter 权限。
+
+
+
+== vCenter 管理员角色所需的权限
+
+数据存储.分配空间 数据存储.浏览 数据存储.删除 数据存储.文件管理 数据存储.移动 数据存储.重命名 扩展.注册 扩展.取消注册 扩展.更新 主机.配置.高级配置 主机.配置.资源 主机.配置.设置 主机.配置.存储 主机.本地.创建虚拟机 主机.本地.删除虚拟机 主机.本地.重新配置虚拟机 网络.分配 资源.应用建议 资源.将虚拟机分配到池 资源.冷迁移 资源.热迁移 资源.查询VMotion 系统.匿名 系统.读取 系统.查看 任务.创建 任务.更新 虚拟机.配置.添加现有磁盘 虚拟机.配置.添加新磁盘 虚拟机.配置.高级配置 虚拟机.配置.从路径重新加载 虚拟机.配置.删除磁盘 虚拟机.配置.资源 虚拟机.GuestOperations.执行 虚拟机.GuestOperations.修改虚拟机.GuestOperations.查询虚拟机.交互.关机虚拟机.交互.开机虚拟机.库存.创建虚拟机.库存.从现有创建虚拟机.库存.删除虚拟机.库存.移动虚拟机.库存.注册虚拟机.库存.注销虚拟机.状态.创建快照虚拟机.状态.删除快照虚拟机.状态.恢复到快照
+
+
+
+== 特定于 VMware vCenter 的SnapCenter插件所需的权限
+
+|===
+
+
+| *Privileges* | *标签* 
+
+
+| netappSCV.Guest.恢复文件 | 访客文件恢复 
+
+
+| netappSCV.Recovery.MountUnMount | 挂载/卸载 
+
+
+| netappSCV.备份.删除备份作业 | 删除资源组/备份 
+
+
+| netappSCV.配置.配置存储系统.删除 | 删除存储系统 
+
+
+| netappSCV.查看 | 查看 
+
+
+| netappSCV.Recovery.恢复虚拟机 | 恢复虚拟机 
+
+
+| netappSCV.配置.配置存储系统.添加更新 | 添加/修改存储系统 
+
+
+| netappSCV.备份.立即备份 | 立即备份 
+
+
+| netappSCV.Guest.配置 | 来宾配置 
+
+
+| netappSCV.配置.配置SnapCenterServer | 配置 SnapCenter 服务器 
+
+
+| netappSCV.Backup.BackupScheduled | 创建资源组 
+|===

@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_upgrade_to_a_new_patch.html 
+keywords:  
+summary: 如果要升级到同一版本的新修补程序，则必须在升级或注册之前清除 vCenter Web Server 上的SnapCenter Plug-in for VMware vSphere缓存并重新启动服务器。 
+---
+= 升级到SnapCenter Plug-in for VMware vSphere的同一版本的新修补程序
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+如果要升级到同一版本的新修补程序，则必须在升级或注册之前清除 vCenter Web Server 上的SnapCenter Plug-in for VMware vSphere缓存并重新启动服务器。
+
+如果未清除插件缓存，则在以下情况下，仪表板和作业监视器中不会显示最近的作业：
+
+* 使用 vCenter 部署了SnapCenter Plug-in for VMware vSphere，然后升级到同一版本中的补丁程序。
+* SnapCenter VMware 虚拟设备部署在 vCenter 1 中。后来，此SnapCenter Plug-in for VMware vSphere被注册到新的 vCenter2。使用补丁创建了SnapCenter Plug-in for VMware vSphere的新实例，并将其注册到 vCenter1。但是，由于 vCenter1 仍然具有来自第一个未安装SnapCenter Plug-in for VMware vSphere的缓存插件，因此需要清除缓存。
+
+
+
+
+== 清除缓存的步骤
+
+. 找到 `vsphere-client-serenity`文件夹，然后找到 `com.netapp.scv.client-<release-number>`文件夹并将其删除。
++
+文件夹名称随每个版本的发布而变化。
+
++
+请参阅 VMware 文档以了解 `vsphere-client-serenity`您的操作系统的文件夹。
+
+. 重新启动 vCenter Server。
++
+然后，您可以升级SnapCenter Plug-in for VMware vSphere。
+
+

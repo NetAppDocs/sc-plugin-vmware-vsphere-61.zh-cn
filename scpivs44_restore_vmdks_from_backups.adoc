@@ -1,0 +1,63 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_restore_vmdks_from_backups.html 
+keywords:  
+summary: 您可以从传统虚拟机或 vVol 虚拟机的主备份或辅助备份中恢复现有的 VMDK 或已删除或分离的 VMDK。 
+---
+= 从备份还原 VMDK
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以从传统虚拟机或 vVol 虚拟机的主备份或辅助备份中恢复现有的 VMDK 或已删除或分离的 VMDK。
+
+您可以将虚拟机上的一个或多个虚拟机磁盘 (VMDK) 还原到同一个数据存储区。
+
+
+TIP: 为了提高 NFS 环境中恢复操作的性能，请启用 VMware 应用程序 vStorage API for Array Integration (VAAI)。
+
+.开始之前
+* 必须存在备份。
++
+您必须已使用适用于SnapCenter Plug-in for VMware vSphere创建虚拟机的备份。
+
+* VM 不得处于传输状态。
++
+您要恢复的虚拟机不能处于 vMotion 或 Storage vMotion 状态。
+
+
+
+.关于此任务
+* 如果 VMDK 被删除或从 VM 中分离，则还原操作会将 VMDK 附加到 VM。
+* 如果虚拟机所在的FabricPool的存储层不可用，则恢复操作可能会失败。
+* 连接和恢复操作使用默认的 SCSi 控制器连接 VMDK。但是，当备份连接到具有 NVMe 磁盘的 VM 的 VMDK 时，连接和恢复操作将使用 NVMe 控制器（如果可用）。
+
+
+.步骤
+. 在 VMware vSphere 客户端 GUI 中，选择工具栏中的 *菜单*，然后从下拉列表中选择 *虚拟机和模板*。
+. 在左侧导航窗格中，右键单击虚拟机，然后在下拉列表中选择“SnapCenter Plug-in for VMware vSphere”，然后在辅助下拉列表中选择“还原”。
+. 在“*恢复*”向导中的“选择备份”页面上，选择要从中恢复的备份副本。
++
+您可以搜索特定的备份名称或部分备份名称，也可以通过选择过滤器图标并选择日期和时间范围来过滤备份列表，选择是否需要包含 VMware 快照的备份、是否需要已安装的备份以及主要位置或次要位置。选择“*确定*”返回向导。
+
+. 在“选择范围”页面上，选择恢复目标。
++
+|===
+| 恢复至… | 指定还原目标... 
+
+
+| 原始数据存储 | 从下拉列表中选择*特定磁盘*，然后选择*下一步*。在数据存储选择表中，您可以选择或取消选择任何 VMDK。 
+
+
+| 备用位置的备用数据存储 | 选择目标数据存储并从列表中选择不同的数据存储。 
+|===
+. 在“选择位置”页面上，选择要恢复的快照（主快照或辅助快照）。
+. 查看摘要页面，然后选择*完成*。
+. 可选：通过选择屏幕底部的“最近任务”来监控操作进度。
+. 刷新屏幕以显示更新的信息。
+

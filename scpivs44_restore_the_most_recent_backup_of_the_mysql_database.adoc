@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_restore_the_most_recent_backup_of_the_mysql_database.html 
+keywords:  
+summary: 您可以使用维护控制台还原适用于SnapCenter Plug-in for VMware vSphere的 MySQL 数据库（也称为 NSM 数据库）的最新备份。 
+---
+= 恢复 MySQL 数据库的最新备份
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以使用维护控制台还原适用于SnapCenter Plug-in for VMware vSphere的 MySQL 数据库（也称为 NSM 数据库）的最新备份。
+
+.步骤
+. 打开维护控制台窗口。
++
+link:scpivs44_access_the_maintenance_console.html["访问维护控制台"^] 。
+
+. 从主菜单中，输入选项*1)应用程序配置*。
+. 从应用程序配置菜单中，输入选项*6) MySQL 备份和恢复*。
+. 从 MySQL 备份和恢复配置菜单中，输入选项 *4) 恢复 MySQL 备份*。
+. 在提示“使用最近的备份恢复”时输入 *y*，然后按 *Enter*。
++
+备份的 MySQL 数据库已恢复到其原始位置。
+
+

@@ -1,0 +1,95 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_upgrade.html 
+keywords:  
+summary: 如果您正在使用SnapCenter Plug-in for VMware vSphere，则可以升级到较新版本。 
+---
+= 从SnapCenter Plug-in for VMware vSphere的早期版本升级
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+
+NOTE: 仅 VMware vCenter Server 7 Update 1 及更高版本支持升级到 SCV 6.1，对于版本 7 Update 1 之前的 VMware vCenter Server，您应该继续使用 SCV 4.7。对于不受支持的 VMware vCenter 服务器版本，升级会造成中断。
+
+如果您正在使用SnapCenter Plug-in for VMware vSphere，则可以升级到较新版本。升级过程会取消注册现有插件，并部署仅与 vSphere 7.0U1 及更高版本兼容的插件。
+
+
+
+== 升级路径
+
+|===
+
+
+| 如果您使用的是适用SnapCenter Plug-in for VMware vSphere... | 您可以直接将SnapCenter Plug-in for VMware vSphere升级到... 
+
+
+| SCV 6.0 | 升级到 SCV 6.1 
+
+
+| SCV 5.0 | 升级到 SCV 6.0 和 SCV 6.1 
+
+
+| SCV 4.9 | 升级到 SCV 5.0 和 SCV 6.0 
+
+
+| SCV 4.8 | 升级到 SCV 4.9 和 SCV 5.0 
+
+
+| SCV 4.7 | 升级到 SCV 4.8 和 SCV 4.9 
+
+
+| SCV 4.6 | 升级到 SCV 4.7 和 SCV 4.8 
+|===
+
+TIP: 在开始升级之前，请备份SnapCenter Plug-in for VMware vSphere。
+
+
+NOTE: 不支持将网络配置从静态切换到 DHCP。
+
+有关受支持版本的最新信息，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]（IMT）。
+
+.步骤
+. 通过禁用SnapCenter Plug-in for VMware vSphere来准备升级。
++
+.. 登录到SnapCenter Plug-in for VMware vSphere管理 GUI。部署SnapCenter Plug-in for VMware vSphere时会显示 IP 地址。
+.. 在左侧导航窗格中选择“*配置*”，然后在“插件详细信息”部分中选择“*服务*”选项以禁用该插件。
+
+
+. 下载升级 `.iso`文件。
++
+.. 登录NetApp支持站点(https://mysupport.netapp.com/products/index.html[]）。
+.. 从产品列表中，选择*SnapCenter Plug-in for VMware vSphere*，然后选择*下载最新版本*按钮。
+.. 下载SnapCenter Plug-in for VMware vSphere `.iso`文件到任意位置。
+
+
+. 安装升级。
++
+.. 在浏览器中，导航到 VMware vSphere vCenter。
+.. 在 vCenter GUI 上，选择 *vSphere 客户端 (HTML)*。
+.. 登录到*VMware vCenter Single Sign-On*页面。
+.. 在导航窗格上，选择要升级的虚拟机，然后选择“摘要”选项卡。
+.. 在“相关对象”窗格上，选择列表中的任何数据存储，然后选择“摘要”选项卡。
+.. 在所选数据存储的“*文件*”选项卡上，选择列表中的任意文件夹，然后选择“*上传文件*”。
+.. 在上传弹出屏幕上，导航到您下载的位置 `.iso`文件，然后选择 `.iso`文件图像，然后选择*打开*。该文件已上传至数据存储。
+.. 导航回要升级的虚拟机，然后选择“摘要”选项卡。在 *VM Hardware* 窗格中的 CD/DVD 字段中，值应为“Disconnected”。
+.. 选择 CD/DVD 字段中的连接图标，然后选择*连接到数据存储上的 CD/DVD 映像*。
++
+image:scpivs44_image42.png["vCenter 用户界面"]
+
+.. 在向导中，执行以下操作：
++
+... 在数据存储区列中，选择上传的数据存储区 `.iso`文件。
+... 在内容列中，导航至 `.iso`您上传的文件，请确保在文件类型字段中选择了“ISO 映像”，然后选择*确定*。等待直到字段显示“已连接”状态。
+
+
+.. 通过访问虚拟设备的“*摘要*”选项卡登录维护控制台，然后选择绿色运行箭头启动维护控制台。
+.. 输入 *2* 进行系统配置，然后输入 *8* 进行升级。
+.. 输入*y*继续并开始升级。
+
+
+

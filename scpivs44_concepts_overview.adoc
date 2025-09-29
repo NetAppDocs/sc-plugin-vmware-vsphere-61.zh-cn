@@ -1,0 +1,78 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_concepts_overview.html 
+keywords:  
+summary: SnapCenter Plug-in for VMware vSphere是一个独立的虚拟设备（开放虚拟设备格式），它为虚拟机和数据存储提供数据保护服务，并支持基于SnapCenter应用程序的插件的数据保护服务。本文档介绍如何部署和使用SnapCenter Plug-in for VMware vSphere，并包含快速入门信息。 
+---
+= 产品概述
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+:firstname: [.lead]
+:author: [.lead]
+:authorinitials: [
+:authors: [.lead]
+:revnumber: 
+:revdate: and supports data protection services for SnapCenter application-based plug-ins. This document describes how to deploy and use SnapCenter Plug-in for VMware vSphere and includes quick start information.
+
+
+SnapCenter Plug-in for VMware vSphere部署为基于 Linux 的虚拟设备。
+
+SnapCenter Plug-in for VMware vSphere为您的环境添加了以下功能：
+
+* 支持虚拟机一致性和崩溃一致性数据保护操作。
++
+您可以使用 vCenter 中的 VMware vSphere 客户端 GUI 执行 VMware 虚拟机（传统 VM 和 vVol VM）、VMDK 和数据存储区的所有备份和还原操作。对于 vVol VM（vVol 数据存储中的 VM），仅支持崩溃一致性备份。您还可以还原虚拟机和 VMDK，以及还原驻留在来宾操作系统上的文件和文件夹。
+
++
+备份虚拟机、VMDK 和数据存储时，该插件不支持 RDM。 VM 的备份作业忽略 RDM。如果需要备份 RDM，则必须使用基于SnapCenter应用程序的插件。
+
++
+SnapCenter Plug-in for VMware vSphere包含一个 MySQL 数据库，其中包含SnapCenter Plug-in for VMware vSphere数据。对于虚拟机一致性和崩溃一致性数据保护，您不需要安装SnapCenter Server。
+
+* 支持应用程序一致（VMDK/RDM 上的应用程序）数据保护操作。
++
+您可以使用SnapCenter GUI 和适当的SnapCenter应用程序插件对虚拟机上主存储和二级存储上的数据库和文件系统执行所有备份和恢复操作。
+
++
+SnapCenter原生利用适用SnapCenter Plug-in for VMware vSphere对 VMDK、原始设备映射 (RDM) 和 NFS 数据存储区执行所有数据保护操作。虚拟设备部署后，插件将处理与 vCenter 的所有交互。SnapCenter Plug-in for VMware vSphere支持所有基于SnapCenter应用程序的插件。
+
++
+SnapCenter不支持数据库和虚拟机的单个快照。必须独立安排和运行虚拟机和数据库的备份，这会创建单独的快照，即使数据库和虚拟机托管在同一卷中。使用SnapCenter GUI 安排数据库应用程序备份；使用 VMware vSphere 客户端 GUI 安排 VM 和数据存储区备份。
+
+* VM 一致性快照需要 VMware 工具
++
+如果未安装并运行 VMware 工具，则文件系统不会静止，并且会创建崩溃一致的快照。
+
+* SAN (VMFS) 环境中的还原操作需要 VMware Storage vMotion
++
+VMware 文件系统 (VMFS) 的恢复工作流程利用 VMware Storage vMotion 功能。  Storage vMotion 是 vSphere 标准许可证的一部分，但不适用于 vSphere Essentials 或 Essentials Plus 许可证。
+
++
+NFS 环境中的大多数还原操作使用本机ONTAP功能（例如，单文件SnapRestore）并且不需要 VMware Storage vMotion。
+
+* 需要适用ONTAP tools for VMware vSphere来配置 VMware vVol VM。
++
+您可以使用ONTAP工具在ONTAP和 VMware Web 客户端中为vVols配置和配置存储。
+
++
+有关更多信息，请参阅适用ONTAP tools for VMware vSphere文档。此外，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]有关ONTAP工具支持的版本的最新信息。
+
+* SnapCenter Plug-in for VMware vSphere作为虚拟设备部署在 Linux VM 中
++
+尽管虚拟设备必须作为 Linux VM 安装，SnapCenter Plug-in for VMware vSphere支持基于 Windows 和基于 Linux 的 vCenter。  SnapCenter本机使用此插件，无需用户干预即可与您的 vCenter 通信，以支持基于SnapCenter应用程序的插件，这些插件在 Windows 和 Linux 虚拟化应用程序上执行数据保护操作。
+
+
+
+除了这些主要功能之外，SnapCenter Plug-in for VMware vSphere还提供对 iSCSI、光纤通道、FCoE、NFS 3.0/4.1、VMFS 5.0/6.0、NVMe over FC 和 NVMe over TCP 的支持。
+
+有关受支持版本的最新信息，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]（IMT）。
+
+有关 NFS 协议和 ESXi 主机的信息，请参阅 VMware 提供的 vSphere Storage 文档。
+
+有关SnapCenter数据保护的信息，请参阅SnapCenter插件中的数据保护信息 http://docs.netapp.com/us-en/snapcenter/index.html["SnapCenter文档"^]。
+
+有关支持的升级和迁移路径的信息，请参阅link:scpivs44_release_notes.html["SnapCenter Plug-in for VMware vSphere发行说明"^]。

@@ -1,0 +1,68 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_register_snapcenter_plugin_vmware_vsphere_with_snapcenter_server.html 
+keywords:  
+summary: 如果您想在SnapCenter中执行基于 VMDK 的应用程序工作流（针对虚拟化数据库和文件系统的基于应用程序的保护工作流），则必须向SnapCenter服务器SnapCenter Plug-in for VMware vSphere。 
+---
+= 使用SnapCenter服务器SnapCenter Plug-in for VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+如果您想在SnapCenter中执行基于 VMDK 的应用程序工作流（针对虚拟化数据库和文件系统的基于应用程序的保护工作流），则必须向SnapCenter服务器SnapCenter Plug-in for VMware vSphere。
+
+如果您是SnapCenter用户，并且已升级到SnapCenter 4.2 并将应用程序通过 VMDK 备份迁移到适用于 VMware 的SnapCenter插件，则迁移命令会自动注册该插件。
+
+.开始之前
+* 您必须运行SnapCenter Server 4.2 或更高版本。
+* 您必须已部署并启用SnapCenter Plug-in for VMware vSphere。
+
+
+.关于此任务
+* 您可以使用SnapCenter GUI 添加“vsphere”类型主机，向SnapCenter服务器SnapCenter Plug-in for VMware vSphere。
++
+端口 8144 是预定义的，SnapCenter Plug-in for VMware vSphere内的通信。
+
++
+您可以在同一SnapCenter Server 4.2 上注册SnapCenter Plug-in for VMware vSphere实例，以支持虚拟机上基于应用程序的数据保护操作。您不能在多个SnapCenter服务器上SnapCenter Plug-in for VMware vSphere。
+
+* 对于链接模式下的 vCenter，您必须为每个 vCenterSnapCenter Plug-in for VMware vSphere。
+
+
+.步骤
+. 在SnapCenter GUI 左侧导航窗格中，选择 *Hosts*。
+. 验证顶部是否选择了“*托管主机*”选项卡，然后找到虚拟设备主机名并验证它是否从SnapCenter服务器解析。
+. 选择“*添加*”以启动向导。
+. 在“添加主机”对话框中，指定要添加到SnapCenter服务器的主机，如下表所示：
++
+|===
+| 对于这个领域…… | 这样做… 
+
+
+| 主机类型 | 选择 *vSphere* 作为主机类型。 
+
+
+| 主机名 | 验证虚拟设备的 IP 地址。 
+
+
+| 凭据 | 输入部署期间提供的SnapCenter Plug-in for VMware vSphere的用户名和密码。 
+|===
+. 选择*提交*。
++
+成功添加 VM 主机后，它将显示在“受管理主机”选项卡上。
+
+. 在左侧导航窗格中，选择“*设置*”，然后选择“*凭据*”选项卡，然后选择“*添加*”为虚拟设备添加凭据。
+. 提供在部署SnapCenter Plug-in for VMware vSphere期间指定的凭据信息。
++
+
+NOTE: 您必须在身份验证字段中选择 Linux。
+
+
+
+.完成后
+如果修改了SnapCenter Plug-in for VMware vSphere，则必须使用SnapCenter托管主机页面更新SnapCenter服务器中的注册。

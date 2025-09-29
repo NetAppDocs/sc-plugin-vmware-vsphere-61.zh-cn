@@ -1,0 +1,62 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_apis_overview.html 
+keywords:  
+summary: 您可以使用SnapCenter Plug-in for VMware vSphere来执行常见的数据保护操作。该插件的 Swagger 网页与 Windows SnapCenter Swagger 网页不同。 
+---
+= 概述
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以使用SnapCenter Plug-in for VMware vSphere来执行常见的数据保护操作。该插件的 Swagger 网页与 Windows SnapCenter Swagger 网页不同。
+
+* REST API 工作流程记录了使用 VMware vSphere 的 REST API 对虚拟机和数据存储区执行以下操作：
++
+** 添加、修改和删除存储虚拟机和集群
+** 创建、修改和删除资源组
+** 备份虚拟机（按计划和按需）
+** 还原现有虚拟机和已删除的虚拟机
+** 还原 VMDK
+** 连接和分离 VMDK
+** 挂载和卸载数据存储
+** 下载作业并生成报告
+** 修改内置时间表
+** 为ASA r2 配置二级保护
+
+
+* VMware vSphere 的 REST API 不支持的操作
++
+** 来宾文件恢复
+** SnapCenter Plug-in for VMware vSphere的安装和配置
+** 为用户分配 RBAC 角色或访问权限
+
+
+* `uri`范围
++
+这 `uri`参数始终返回“null”值。
+
+* 登录超时
++
+默认超时时间为 120 分钟（2 小时）。您可以在 vCenter 设置中配置不同的超时值。
+
+* 代币管理
++
+为了安全起见，REST API 使用随每个请求传递的强制令牌，并在所有 API 调用中用于客户端验证。  VMware vSphere 的 REST API 使用 VMware 身份验证 API 来获取令牌。  VMware 提供令牌管理。
+
++
+要获取令牌，请使用 `/4.1/auth/login`REST API 并提供 vCenter 凭据。
+
+* API 版本标识
++
+每个 REST API 名称都包含该 REST API 首次发布的SnapCenter版本号。例如，REST API `/4.1/datastores/{moref}/backups`首次发布于SnapCenter 4.1。
+
++
+未来版本中的 REST API 通常会向后兼容，并将根据需要进行修改以适应新功能。
+
+

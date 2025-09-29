@@ -1,0 +1,39 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_rest_api_workflows__add_and_modify_storage_vms.html 
+keywords:  
+summary: 要使用适用于SnapCenter Plug-in for VMware vSphere执行添加和修改存储虚拟机操作，您必须遵循规定的 REST API 调用顺序。 
+---
+= 用于添加和修改存储虚拟机的 REST API 工作流
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+要使用适用于SnapCenter Plug-in for VMware vSphere执行添加和修改存储虚拟机操作，您必须遵循规定的 REST API 调用顺序。
+
+对于每个 REST API，添加 `\https://<server>:<port>`在 REST API 的前面形成一个完整的端点。
+
+要添加存储虚拟机操作，请遵循以下工作流程：
+
+|===
+| 步骤 | REST API | 注释 
+
+
+| 1 | `/4.1/storage-system` | `Add Storage System`将指定的存储虚拟机添加到SnapCenter Plug-in for VMware vSphere。 
+|===
+要修改存储虚拟机操作，请遵循以下工作流程：
+
+|===
+| 步骤 | REST API | 注释 
+
+
+| 1 | `/4.1/storage-system` | `getSvmAll`获取所有可用存储虚拟机的列表。记下您要修改的存储虚拟机的*名称*。 
+
+
+| 2 | `/4.1/storage-system` | `Modify Storage System`修改指定的存储VM。除了所有其他必需的属性之外，还要传递步骤 1 中的 *name*。 
+|===

@@ -1,0 +1,31 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_unmount_a_backup.html 
+keywords:  
+summary: 当您不再需要访问数据存储区中的文件时，可以卸载备份。 
+---
+= 卸载备份
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+当您不再需要访问数据存储区中的文件时，可以卸载备份。
+
+如果 VMware vSphere 客户端 GUI 中列出备份已安装，但未在卸载备份屏幕中列出，则需要使用 REST API `/backup/{backup-Id}/cleanup`清理超出范围的数据存储，然后再次尝试卸载过程。
+
+如果您尝试在具有负载共享镜像关系的根卷的存储虚拟机 (SVM) 上挂载 NFS 数据存储区的备份副本，则可能会遇到错误 `You may have reached the maximum number of NFS volumes configured in the vCenter. Check the vSphere Client for any error messages.`为防止出现此问题，请通过导航至 *ESX* > *管理* > *设置* > *高级系统设置* 并更改 NFS.MaxVolumes 值来更改最大卷设置。最大值为 256。
+
+.步骤
+. 在 VMware vSphere 客户端快捷方式页面中选择 *存储*。
+. 在左侧导航窗格中，右键单击数据存储，然后在下拉列表中选择* SnapCenter Plug-in for VMware vSphere*，然后在辅助下拉列表中选择* Unmount*。
++
+
+IMPORTANT: 确保选择要卸载的正确数据存储。否则，可能会对生产工作造成影响。
+
+. 在*卸载克隆的数据存储*对话框中，选择一个数据存储，选中*卸载克隆的数据存储*复选框，然后选择*卸载*。
+

@@ -1,0 +1,81 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_manage_policies.html 
+keywords:  
+summary: 您可以创建、修改、查看、分离和删除适用于SnapCenter Plug-in for VMware vSphere的备份策略。需要策略来执行数据保护操作。 
+---
+= 管理策略
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以创建、修改、查看、分离和删除适用于SnapCenter Plug-in for VMware vSphere的备份策略。需要策略来执行数据保护操作。
+
+
+
+== 分离策略
+
+当您不再希望这些策略来管理资源的数据保护时，您可以从SnapCenter Plug-in for VMware vSphere分离这些策略。您必须先分离策略，然后才能删除它或修改计划频率。
+
+.关于此任务
+SnapCenter Plug-in for VMware vSphere分离策略的准则与SnapCenter资源组的准则不同。对于 VMware vSphere 客户端资源组，可以分离所有策略，从而使资源组没有策略。但是，要对该资源组执行任何数据保护操作，您必须附加至少一个策略。
+
+.步骤
+. 在 SCV 插件的左侧导航窗格中，选择 *资源组*，然后选择一个资源组并选择 *编辑*。
+. 在“编辑资源组”向导的“策略”页面上，清除要分离的策略旁边的复选标记。
++
+您还可以通过勾选策略来向资源组添加策略。
+
+. 在向导的其余部分对资源组进行任何其他修改，然后选择“完成”。
+
+
+
+
+== 修改策略
+
+您可以修改适用SnapCenter Plug-in for VMware vSphere的策略。当策略附加到资源组时，您可以修改频率、复制选项、快照保留设置或脚本信息。
+
+.关于此任务
+修改SnapCenter Plug-in for VMware vSphere备份策略与修改基于SnapCenter应用程序的插件的备份策略不同。修改插件策略时，无需将策略与资源组分离。
+
+在修改复制或保留设置之前，您应该考虑可能产生的后果。
+
+* 增加复制或保留设置
++
+备份会持续累积，直到达到新的设置。
+
+* 减少复制或保留设置
++
+下次备份时，超出新设置的备份将被删除。
+
+
+
+
+NOTE: 要修改SnapCenter Plug-in for VMware vSphere策略计划，您必须修改插件资源组中的计划。
+
+.步骤
+. 在 SCV 插件的左侧导航窗格中，选择 *策略*，然后选择一个策略并选择 *编辑*。
+. 修改策略字段。
+. 完成后，选择*更新*。
+
+
+更改将在执行下一次计划备份时生效。
+
+
+
+== 删除策略
+
+如果您不再需要为SnapCenter Plug-in for VMware vSphere配置备份策略，您可能需要将其删除。
+
+.开始之前
+您必须先将该策略与SnapCenter虚拟设备中的所有资源组分离，然后才能删除它。
+
+.步骤
+. 在 SCV 插件的左侧导航窗格中，选择 *策略*，然后选择一个策略并选择 *删除*。
+. 在确认对话框中选择“*确定*”。
+

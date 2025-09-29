@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_download_the_ova_open_virtual_appliance.html 
+keywords:  
+summary: .tar 文件包含 OVA，它是一组用于 VM 和数据存储数据保护的微服务以及证书文件。 
+---
+= 下载开放虚拟设备 (OVA)
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+在安装开放虚拟设备 (OVA) 之前，请将证书添加到 vCenter。  .tar 文件包含 OVA 和 Entrust Root 和中间证书，这些证书可以在证书文件夹中找到。  VMware vCenter 7u1 及更高版本支持 OVA 部署。
+
+在 VMware vCenter 7.0.3 及更高版本中，Entrust 证书签名的 OVA 不再受信任。您需要执行以下步骤来解决该问题。
+
+.步骤
+. 要下载适用于 VMware 的SnapCenter插件，请执行以下操作：
++
+** 登录到NetApp支持站点 ( https://mysupport.netapp.com/products/index.html["https://mysupport.netapp.com/products/index.html"^] ）。
+** 从产品列表中，选择*SnapCenter Plug-in for VMware vSphere*，然后选择*下载最新版本*按钮。
+** 下载SnapCenter Plug-in for VMware vSphere `.tar`文件到任意位置。
+
+
+. 提取 tar 文件的内容。  tar 文件包含 OVA 和 certs 文件夹。  certs 文件夹包含 Entrust Root 证书和中间证书。
+. 使用 vSphere Client 登录到 vCenter Server。
+. 导航到*管理>证书>证书管理*。
+. 在“受信任的根证书”旁边，选择“添加”
++
+** 转到_certs_文件夹。
+** 选择 Entrust Root 和 Intermediate 证书。
+** 每次安装一个证书。
+
+
+. 证书被添加到“*受信任的根证书*”下的面板中。一旦安装了证书，就可以验证和部署 OVA。
+
+
+
+NOTE: 如果下载的 OVA 没有被篡改，则 *Publisher* 列显示 *Trusted certificate*。

@@ -1,0 +1,68 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_migration_overview.html 
+keywords:  
+summary:  
+---
+= 迁移概述
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+迁移命令仅从SnapCenter 4.0 及更高版本#迁移元数据。如果您使用的是早期版本的SnapCenter ，则必须先升级才能迁移。
+
+* 迁移的内容包括
++
+** 迁移的内容
++
+SnapCenter元数据，包括SnapCenter配置文件中的存储系统、自定义限制和电子邮件设置、策略、资源组、备份元数据和挂载。  （遇到前言或后言则迁移失败）
+
+** 未迁移的内容
++
+为资源组配置的前脚本和后脚本
+
++
+活动来宾文件恢复会话、来宾文件恢复凭据和代理虚拟机
+
++
+如果在来宾文件恢复会话处于活动状态时开始迁移，则会话将被删除并且附加的磁盘不会被卸载。您可能必须手动删除附加的磁盘。
+
++
+`scbr.override`配置文件
+
+
+
+* SnapCenter主机已暂停
++
+为了确保迁移成功，迁移命令会暂停所有在SnapCenter注册的主机。迁移过程成功完成后， SnapCenter主机将恢复。
+
+* 迁移 cmdlet 进程
++
+您必须使用 Windows Powershell cmdlet `invoke-SCVOVAMigration`对于向SnapCenter注册的SnapCenter Plug-in for VMware vSphere的每个实例。
+
++
+该 cmdlet 执行以下操作：
+
++
+** 暂停所有计划以防止迁移期间作业失败。迁移成功后，计划将自动重新启用。
+** 迁移存储连接和元数据。
+** 为迁移后备份创建备份计划。
+** 从 Windows 主机卸载现有的SnapCenter Plug-in for VMware vSphere。
++
+如果SnapCenter Server 主机上安装了SnapCenter Plug-in for VMware vSphere，并且为SnapCenter存储库配置了保护，则迁移过程还会卸载包含适用SnapCenter Plug-in for VMware vSphere和适用于 Windows 的SnapCenter插件的基于 Windows 的插件包，然后重新安装最新版本的适用于 Windows 的SnapCenter插件以支持存储库保护。SnapCenter GUI 中的主机类型从“vsphere”更改为“Windows”。
+
+** 从 Windows SnapCenter服务器中删除 vSphere 主机和资源组。
+** 激活基于 Linux 的SnapCenter Plug-in for VMware vSphere上的备份作业。
+** 使用 SnapCenter 注册适用于 VMware vSphere 的SnapCenterSnapCenter Plug-in for VMware vSphere的vSphere 主机，以支持基于应用程序的虚拟化数据库和文件系统备份（基于 VMDK 备份的应用程序）。
+
+
+* 元数据存储在哪里
++
+基于应用程序的 VMDK 备份的元数据存储在SnapCenter Server 存储库中。  VM 和数据存储备份的元数据存储在SnapCenter Plug-in for VMware vSphere中。
+
+

@@ -1,0 +1,157 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_deploy_snapcenter_plug-in_for_vmware_vsphere.html 
+keywords:  
+summary: 要使用SnapCenter功能保护虚拟机上的虚拟机、数据存储区和应用程序一致的数据库，您必须部署SnapCenter Plug-in for VMware vSphere。 
+---
+= SnapCenter Plug-in for VMware vSphere
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+要使用SnapCenter功能保护虚拟机上的虚拟机、数据存储区和应用程序一致的数据库，您必须部署SnapCenter Plug-in for VMware vSphere。
+
+.开始之前
+本节列出了开始部署之前应执行的所有必要操作。
+
+
+NOTE: VMware vCenter 7u1 及更高版本支持 OVA 部署。
+
+* 您必须已经阅读了部署要求。
+* 您必须运行受支持的 vCenter Server 版本。
+* 您必须已配置并设置 vCenter Server 环境。
+* 您必须为SnapCenter Plug-in for VMware vSphere设置 ESXi 主机。
+* 您必须已下载SnapCenter Plug-in for VMware vSphere。
+* 您必须拥有 vCenter Server 实例的登录身份验证详细信息。
+* 您必须拥有包含有效公钥和私钥文件的证书。欲了解更多信息，请参阅以下文章 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/SnapCenter_Certificate_Resolution_Guide["存储证书管理"]部分。
+* 您必须注销并关闭 vSphere 客户端的所有浏览器会话并删除浏览器缓存，以避免在部署SnapCenter Plug-in for VMware vSphere期间出现任何浏览器缓存问题。
+* 您必须在 vCenter 中启用传输层安全性 (TLS)。请参阅 VMware 文档。
+* 如果您计划在部署了适用于SnapCenter Plug-in for VMware vSphere的vCenter 以外的 vCenter 中执行备份，则 ESXi 服务器、SnapCenter Plug-in for VMware vSphere和每个 vCenter 必须同步到同一时间。
+* 要保护 vVol 数据存储上的虚拟机，您必须首先ONTAP tools for VMware vSphere。有关ONTAP工具支持的版本的最新信息，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]。  ONTAP工具在ONTAP和 VMware Web 客户端上配置和配置存储。
+
+
+在与 vCenter 相同的时区中部署SnapCenter Plug-in for VMware vSphere。备份计划在部署适用SnapCenter Plug-in for VMware vSphere的时区中执行。vCenter 以 vCenter 所在的时区报告数据。因此，如果SnapCenter Plug-in for VMware vSphere和 vCenter 位于不同的时区，SnapCenter Plug-in for VMware vSphere仪表板中的数据可能与报告中的数据不同。
+
+.步骤
+. 对于 VMware vCenter 7.0.3 及更高版本，请按照link:scpivs44_download_the_ova_open_virtual_appliance.html["下载开放虚拟设备 (OVA)"^]将证书导入 vCenter。
+. 在浏览器中，导航到 VMware vSphere vCenter。
++
+
+NOTE: 对于 IPv6 地址 HTML Web 客户端，您必须使用 Chrome 或 Firefox。
+
+. 登录到*VMware vCenter Single Sign-On*页面。
+. 在导航窗格上，右键单击任何作为虚拟机有效父对象的清单对象（例如数据中心、集群或主机），然后选择 *部署 OVF 模板* 以启动 VMware 部署向导。
+. 将包含 .ova 文件的 .tar 文件提取到本地系统上。在“选择 OVF 模板”页面上，指定 `.ova`.tar 解压文件夹中的文件。
+. 选择“下一步”。
+. 在“选择名称和文件夹”页面上，输入 VM 或 vApp 的唯一名称，并选择部署位置，然后选择“下一步”。
++
+此步骤指定导入的位置 `.tar`文件导入到 vCenter。 VM 的默认名称与所选 `.ova`文件。如果更改默认名称，请选择每个 vCenter Server VM 文件夹中唯一的名称。
+
++
+VM 的默认部署位置是您启动向导的清单对象。
+
+. 在“选择资源”页面上，选择要运行已部署的 VM 模板的资源，然后选择“下一步”。
+. 在“查看详情”页面上，验证 `.tar`模板详细信息并选择*下一步*。
+. 在*许可协议*页面上，选中*我接受所有许可协议*复选框。
+. 在*选择存储*页面上，定义已部署的 OVF 模板的文件的存储位置和方式。
++
+.. 选择 VMDK 的磁盘格式。
+.. 选择虚拟机存储策略。
++
+仅当目标资源上启用了存储策略时，此选项才可用。
+
+.. 选择一个数据存储来存储已部署的 OVA 模板。
++
+配置文件和虚拟磁盘文件存储在数据存储中。
+
++
+选择一个足够大的数据存储来容纳虚拟机或 vApp 以及所有相关的虚拟磁盘文件。
+
+
+
+. 在“选择网络”页面上，执行以下操作：
++
+.. 选择源网络并将其映射到目标网络，
++
+源网络列列出了 OVA 模板中定义的所有网络。
+
+.. 在*IP 分配设置*部分，选择所需的 IP 地址协议，然后选择*下一步*。
++
+SnapCenter Plug-in for VMware vSphere支持一个网络接口。如果需要多个网络适配器，则必须手动设置。参考 https://kb.netapp.com/Advice_and_Troubleshooting/Data_Protection_and_Security/SnapCenter/How_to_create_additional_network_adapters_in_NDB_and_SCV_4.3["知识库文章：如何创建附加网络适配器"^]。
+
+
+
+. 在“自定义模板”页面上，执行以下操作：
++
+.. 在*注册到现有 vCenter* 部分中，输入虚拟设备的 vCenter 名称和 vCenter 凭据。
++
+在“vCenter 用户名”字段中，按以下格式输入用户名 `domain\username`。
+
+.. 在*创建 SCV 凭证*部分，输入本地凭证。
++
+在*用户名*字段中，输入本地用户名；不要包含域详细信息。
+
++
+
+IMPORTANT: 记下您指定的用户名和密码。如果您稍后想要修改SnapCenter Plug-in for VMware vSphere配置，则需要使用这些凭据。
+
+.. 输入 maint 用户的凭据。
+.. 在“设置网络属性”部分中，输入主机名。
++
+... 在“设置 IPv4 网络属性”部分中，输入网络信息，例如 IPv4 地址、IPv4 网络掩码、IPv4 网关、IPv4 主 DNS、IPv4 辅助 DNS 和 IPv4 搜索域。
+... 在“设置 IPv6 网络属性”部分中，输入网络信息，例如 IPv6 地址、IPv6 网络掩码、IPv6 网关、IPv6 主 DNS、IPv6 辅助 DNS 和 IPv6 搜索域。
++
+如果适用，请选择 IPv4 或 IPv6 地址字段，或两者。如果您同时使用 IPv4 和 IPv6 地址，则只需为其中一个指定主 DNS。
+
++
+
+IMPORTANT: 如果您想继续使用 DHCP 作为网络配置，则可以跳过这些步骤并将“设置网络属性”部分中的条目留空。
+
+
+
+.. 在*设置日期和时间*中，选择 vCenter 所在的时区。
+
+
+. 在*准备完成*页面上，查看页面并选择*完成*。
++
+所有主机都必须配置 IP 地址（不支持 FQDN 主机名）。部署操作在部署之前不会验证您的输入。
+
++
+在等待 OVF 导入和部署任务完成时，您可以从“近期任务”窗口查看部署进度。
+
++
+成功部署SnapCenter Plug-in for VMware vSphere后，它将部署为 Linux VM，在 vCenter 中注册，并安装 VMware vSphere 客户端。
+
+. 导航到部署了SnapCenter Plug-in for VMware vSphere的虚拟机，然后选择“*摘要*”选项卡，然后选择“*启动*”框以启动虚拟设备。
+. 在SnapCenter Plug-in for VMware vSphere启动时，右键单击已部署的SnapCenter Plug-in for VMware vSphere，选择“*Guest OS*”，然后选择“*Install VMware tools*”。
++
+VMware 工具安装在部署了适用于SnapCenter Plug-in for VMware vSphere的虚拟机上。有关安装 VMware 工具的更多信息，请参阅 VMware 文档。
+
++
+部署可能需要几分钟才能完成。当适用SnapCenter Plug-in for VMware vSphere打开、安装了 VMware 工具并且屏幕提示您登录到SnapCenter Plug-in for VMware vSphere，表示部署成功。您可以在第一次重启时将网络配置从 DHCP 切换为静态。但是，不支持从静态切换到 DHCP。
+
++
+屏幕显示部署SnapCenter Plug-in for VMware vSphere的IP 地址。记下 IP 地址。如果要更改适用于SnapCenter Plug-in for VMware vSphereSnapCenter Plug-in for VMware vSphere管理 GUI。
+
+. 使用部署屏幕上显示的 IP 地址和部署向导中提供的凭据登录到SnapCenter Plug-in for VMware vSphere管理 GUI，然后在仪表板上验证适用SnapCenter Plug-in for VMware vSphere是否已成功连接到 vCenter 并已启用。
++
+使用格式 `\https://<appliance-IP-address>:8080`访问管理 GUI。
+
++
+使用部署时设置的管理员用户名和密码以及使用维护控制台生成的 MFA 令牌登录。
+
++
+如果未启用适用SnapCenter Plug-in for VMware vSphere，请参阅link:scpivs44_restart_the_vmware_vsphere_web_client_service.html["重新启动 VMware vSphere 客户端服务"]。
+
++
+如果主机名是“UnifiedVSC/SCV”，则重新启动设备。如果重新启动设备后主机名仍未更改为指定的主机名，则必须重新安装设备。
+
+
+
+.完成后
+您应该完成所需的link:scpivs44_post_deployment_required_operations_and_issues.html["部署后行动"]。

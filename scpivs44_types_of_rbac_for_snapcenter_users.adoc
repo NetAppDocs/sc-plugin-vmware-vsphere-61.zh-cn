@@ -1,0 +1,62 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_types_of_rbac_for_snapcenter_users.html 
+keywords:  
+summary: 如果您正在使用适用SnapCenter Plug-in for VMware vSphere，则 vCenter Server 会提供额外级别的 RBAC。该插件支持 vCenter Server RBAC 和ONTAP RBAC。 
+---
+= SnapCenter Plug-in for VMware vSphere的 RBAC 类型
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+如果您正在使用适用SnapCenter Plug-in for VMware vSphere，则 vCenter Server 会提供额外级别的 RBAC。该插件支持 vCenter Server RBAC 和ONTAP RBAC。
+
+
+
+== vCenter Server RBAC
+
+此安全机制适用于SnapCenter Plug-in for VMware vSphere执行的所有作业，包括虚拟机一致性、虚拟机崩溃一致性和SnapCenter服务器应用程序一致性（VMDK 上的应用程序）作业。此级别的 RBAC 限制了 vSphere 用户在 vSphere 对象（例如虚拟机 (VM) 和数据存储区）上执行SnapCenter Plug-in for VMware vSphere的能力。
+
+SnapCenter Plug-in for VMware vSphere为 vCenter 上的SnapCenter操作创建以下角色：
+
+`SCV Administrator`
+`SCV Backup`
+`SCV Guest File Restore`
+`SCV Restore`
+`SCV View`
+
+vSphere 管理员通过执行以下操作来设置 vCenter Server RBAC：
+
+* 设置根对象（也称为根文件夹）上的 vCenter Server 权限。然后，您可以通过限制不需要这些权限的子实体来优化安全性。
+* 将 SCV 角色分配给 Active Directory 用户。
++
+至少，所有用户都必须能够查看 vCenter 对象。如果没有此权限，用户将无法访问 VMware vSphere 客户端 GUI。
+
+
+
+
+
+== ONTAP RBAC
+
+此安全机制仅适用于SnapCenter Server 应用程序一致（VMDK 上的应用程序）作业。此级别限制了SnapCenter在特定存储系统上执行特定存储操作的能力，例如备份数据存储的存储。
+
+使用以下工作流程设置ONTAP和SnapCenter RBAC：
+
+. 存储管理员在存储虚拟机上创建具有必要权限的角色。
+. 然后存储管理员将角色分配给存储用户。
+. SnapCenter管理员使用该存储用户名将存储 VM 添加到SnapCenter服务器。
+. 然后， SnapCenter管理员将角色分配给SnapCenter用户。
+
+
+
+
+== RBAC 权限验证工作流程
+
+下图概述了 RBAC 权限的验证工作流程（vCenter 和ONTAP）：
+
+image:scpivs44_image1.png["RBAC 权限验证工作流程"]

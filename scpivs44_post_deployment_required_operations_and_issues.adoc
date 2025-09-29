@@ -1,0 +1,117 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_post_deployment_required_operations_and_issues.html 
+keywords:  
+summary: 部署适用SnapCenter Plug-in for VMware vSphere后，您必须完成安装。 
+---
+= 部署后所需的操作和问题
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+部署适用SnapCenter Plug-in for VMware vSphere后，您必须完成安装。
+
+
+
+== 部署后必需的操作
+
+如果您是新的SnapCenter用户，则必须先将存储虚拟机添加到SnapCenter ，然后才能执行任何数据保护操作。添加存储虚拟机时，指定管理 LIF。您还可以添加集群并指定集群管理 LIF。有关添加存储的信息，请参阅link:scpivs44_add_storage_01.html["添加存储"^]。
+
+
+
+== 您可能遇到的部署问题
+
+* 部署虚拟设备后，在以下情况下，仪表板上的“*备份作业*”选项卡可能无法加载：
++
+** 您正在运行 IPv4 地址，并且有两个用于SnapCenter VMware vSphere 主机的 IP 地址。结果，作业请求被发送到SnapCenter服务器无法识别的 IP 地址。为了防止出现此问题，请添加要使用的 IP 地址，如下所示：
++
+... 导航到部署适用SnapCenter Plug-in for VMware vSphere的位置： `/opt/netapp/scvservice/standalone_aegis/etc`
+... 打开文件 network-interface.properties。
+... 在 `network.interface=10.10.10.10`字段中，添加您想要使用的 IP 地址。
+
+
+** 您有两个 NIC。
+
+
+* 部署SnapCenter Plug-in for VMware vSphere后，适用SnapCenter Plug-in for VMware vSphere的vCenter 中的 MOB 条目可能仍显示旧版本号。当 vCenter 中正在运行其他作业时，可能会发生这种情况。vCenter 最终会更新该条目。
+
+
+要解决其中任何一个问题，请执行以下操作：
+
+. 清除浏览器缓存，然后检查 GUI 是否正常运行。
++
+如果问题仍然存在，请重新启动 VMware vSphere 客户端服务
+
+. 登录 vCenter，然后在工具栏中选择 *菜单*，然后选择 *SnapCenter Plug-in for VMware vSphere*。
+
+
+
+
+== 管理身份验证错误
+
+如果您不使用管理员凭据，则在部署SnapCenter Plug-in for VMware vSphere或迁移后可能会收到身份验证错误。如果遇到身份验证错误，则必须重新启动服务。
+
+.步骤
+. 使用以下格式登录到SnapCenter Plug-in for VMware vSphere管理 GUI `\https://<appliance-IP-address>:8080` 。使用管理员用户名、密码和 MFA 令牌详细信息登录。可以从维护控制台生成 MFA 令牌。
+. 重新启动服务。
+
+
+
+
+== 使用SnapCenter服务器SnapCenter Plug-in for VMware vSphere
+
+如果您想在SnapCenter中执行基于 VMDK 的应用程序工作流（针对虚拟化数据库和文件系统的基于应用程序的保护工作流），则必须向SnapCenter服务器SnapCenter Plug-in for VMware vSphere。
+
+.开始之前
+* 您必须运行SnapCenter Server 4.2 或更高版本。
+* 您必须已部署并启用SnapCenter Plug-in for VMware vSphere。
+
+
+.关于此任务
+* 您可以使用SnapCenter GUI 添加“vsphere”类型主机，向SnapCenter服务器SnapCenter Plug-in for VMware vSphere。
++
+端口 8144 是预定义的，SnapCenter Plug-in for VMware vSphere内的通信。
+
++
+您可以在同一SnapCenter服务器上注册SnapCenter Plug-in for VMware vSphere实例，以支持虚拟机上基于应用程序的数据保护操作。您不能在多个SnapCenter服务器上SnapCenter Plug-in for VMware vSphere。
+
+* 对于链接模式下的 vCenter，您必须为每个 vCenterSnapCenter Plug-in for VMware vSphere。
+
+
+.步骤
+. 在SnapCenter GUI 左侧导航窗格中，选择 *Hosts*。
+. 验证顶部是否选择了“*托管主机*”选项卡，然后找到虚拟设备主机名并验证它是否从SnapCenter服务器解析。
+. 选择“*添加*”以启动向导。
+. 在“添加主机”对话框中，指定要添加到SnapCenter服务器的主机，如下表所示：
++
+|===
+| 对于这个领域…… | 这样做… 
+
+
+| 主机类型 | 选择 *vSphere* 作为主机类型。 
+
+
+| 主机名 | 验证虚拟设备的 IP 地址。 
+
+
+| 凭据 | 输入部署期间提供的SnapCenter Plug-in for VMware vSphere的用户名和密码。 
+|===
+. 选择*提交*。
++
+成功添加 VM 主机后，它将显示在“受管理主机”选项卡上。
+
+. 在左侧导航窗格中，选择“*设置*”，然后选择“*凭据*”选项卡，然后选择“*添加*”为虚拟设备添加凭据。
+. 提供在部署SnapCenter Plug-in for VMware vSphere期间指定的凭据信息。
++
+
+NOTE: 您必须在身份验证字段中选择 Linux。
+
+
+
+.完成后
+如果修改了SnapCenter Plug-in for VMware vSphere，则必须使用SnapCenter托管主机页面更新SnapCenter服务器中的注册。

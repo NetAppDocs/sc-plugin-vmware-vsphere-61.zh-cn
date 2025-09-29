@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: scpivs44_search_for_backups.html 
+keywords:  
+summary: 您可以使用还原向导搜索并查找虚拟机或数据存储区的特定备份。找到备份后，您就可以恢复它。 
+---
+= 搜索备份
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./media/
+
+
+[role="lead"]
+您可以使用还原向导搜索并查找虚拟机或数据存储区的特定备份。找到备份后，您就可以恢复它。
+
+.步骤
+. 在 VMware vSphere 客户端 GUI 中，选择工具栏中的 *菜单*，然后执行以下操作之一：
++
+|===
+| 要查看以下备份... | 执行以下操作... 
+
+
+| VM | 选择“主机和集群”菜单选项，然后选择一个虚拟机，然后选择“配置”选项卡，然后在“SnapCenter Plug-in for VMware vSphere”部分中选择“备份”。 
+
+
+| 数据存储库 | 选择“*存储*”菜单选项，然后选择一个数据存储，然后选择“*配置*”选项卡，然后在“*SnapCenter Plug-in for VMware vSphere*”部分中选择“*备份*”。 
+|===
+. 在左侧导航窗格中，展开包含虚拟机或数据存储区的数据中心。
+. 可选：右键单击虚拟机或数据存储，然后在下拉列表中选择* SnapCenter Plug-in for VMware vSphere*，然后在辅助下拉列表中选择* 还原*。
+. 在*恢复*向导中输入搜索名称并选择*搜索*。
++
+您可以通过选择过滤器图标并选择日期和时间范围来过滤备份列表，选择是否需要包含 VMware 快照的备份、是否需要已安装的备份以及位置。选择“确定”。
+
+
