@@ -152,9 +152,6 @@ NVMe over TCP 和 NVMe over FC 协议支持的最低软件要求是：
 
 
 | SnapCenter Plug-in for VMware vSphere）、日志和 MySQL 数据库的最小硬盘空间 | 100 GB 
-
-
-| 设备中 vmcontrol 服务的最大堆大小 | 8 GB 
 |===
 
 
