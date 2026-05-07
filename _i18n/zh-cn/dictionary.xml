@@ -307,7 +307,6 @@
   <block id="110328d238985c18e0a7947b09b1ff0f" category="summary">SnapCenter Plug-in for VMware vSphere采用 SSL 加密来与客户端浏览器进行安全通信。虽然这确实支持通过网络传输加密数据，但创建新的自签名证书或使用您自己的证书颁发机构 (CA) 基础设施或第三方 CA 可确保该证书对于您的环境是唯一的。</block>
   <block id="8fbcd736aac5b9c6baba8f4db349f50e" category="doc">创建并导入证书</block>
   <block id="9668b00eae1748d51afb7f725a15301a" category="inline-link">知识库文章：如何创建 SSL 证书和/或将 SSL 证书SnapCenter Plug-in for VMware vSphere</block>
-  <block id="6886be2ac69a368a307204ccfa1e00d9" category="paragraph">参考<block ref="bf84a7958c466b4ea912f7e396459ac9" category="inline-link-rx"></block>了解更多信息。</block>
   <block id="0a4a3719bc7519d1162060e0f0e08f8a" category="doc">创建备份策略</block>
   <block id="a70216f52adf1eb56f9c607820ec2859" category="paragraph">按照以下说明创建备份策略</block>
   <block id="bbe1604d17d5228e6cf954f520fbcea1" category="list-text">在 SCV 插件的左侧导航窗格中，选择 *Policies*，然后选择 *New Policy*。</block>
@@ -768,8 +767,6 @@
   <block id="dde8b54fa4a91beedb7b736869c08569" category="cell">24 GB</block>
   <block id="3cb874290f06f3c2d44ce2e858bb041f" category="cell">SnapCenter Plug-in for VMware vSphere）、日志和 MySQL 数据库的最小硬盘空间</block>
   <block id="dcfebc6fbca2c5316f55c914e6593d2d" category="cell">100 GB</block>
-  <block id="f8bce6aa95f5621d608c29e258b620d2" category="cell">设备中 vmcontrol 服务的最大堆大小</block>
-  <block id="af5700014f646d2567efa6288d85ab2b" category="cell">8 GB</block>
   <block id="9a0980e2d2a75eb076f41f7a4d439162" category="section-title">连接和端口要求</block>
   <block id="3672cca688eb0474cd3fee2add1a2067" category="cell">端口类型</block>
   <block id="99ddf0e823c1be51589f68696f62cf56" category="cell">预配置端口</block>
@@ -2173,4 +2170,5 @@
   <block id="c257f5c852c12409e63afb17104f69c5" category="sidebar">REST API</block>
   <block id="a3d53cfe9124531cb5f9bbfefe704326" category="sidebar">用于修改内置计划的 REST API 工作流</block>
   <block id="3da6944b1baaec4beb70694ac307fd1f" category="sidebar">升级到同一版本的新补丁</block>
+  <block id="04bc8505634cea728bd42022dbbe2763" category="paragraph">有关详细信息，请参见<block ref="3cc65228ae073aa630520717edc687a9" category="inline-link-rx"></block>。</block>
 </blocks>
