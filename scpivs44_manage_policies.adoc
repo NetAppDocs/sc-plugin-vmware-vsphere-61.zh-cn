@@ -18,6 +18,7 @@ summary: 您可以创建、修改、查看、分离和删除适用于SnapCenter 
 
 
 
+[[detach-policies]]
 == 分离策略
 
 当您不再希望这些策略来管理资源的数据保护时，您可以从SnapCenter Plug-in for VMware vSphere分离这些策略。您必须先分离策略，然后才能删除它或修改计划频率。
@@ -36,6 +37,7 @@ SnapCenter Plug-in for VMware vSphere分离策略的准则与SnapCenter资源组
 
 
 
+[[modify-policies]]
 == 修改策略
 
 您可以修改适用SnapCenter Plug-in for VMware vSphere的策略。当策略附加到资源组时，您可以修改频率、复制选项、快照保留设置或脚本信息。
@@ -68,6 +70,7 @@ NOTE: 要修改SnapCenter Plug-in for VMware vSphere策略计划，您必须修�
 
 
 
+[[delete-policies]]
 == 删除策略
 
 如果您不再需要为SnapCenter Plug-in for VMware vSphere配置备份策略，您可能需要将其删除。

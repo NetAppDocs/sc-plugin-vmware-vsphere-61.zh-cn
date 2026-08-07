@@ -16,10 +16,16 @@ summary: 如果您正在使用SnapCenter Plug-in for VMware vSphere，则可以�
 
 NOTE: 仅 VMware vCenter Server 7 Update 1 及更高版本支持升级到 SCV 6.1，对于版本 7 Update 1 之前的 VMware vCenter Server，您应该继续使用 SCV 4.7。对于不受支持的 VMware vCenter 服务器版本，升级会造成中断。
 
-如果您正在使用SnapCenter Plug-in for VMware vSphere，则可以升级到较新版本。升级过程会取消注册现有插件，并部署仅与 vSphere 7.0U1 及更高版本兼容的插件。
+如果您正在使用SnapCenter Plug-in for VMware vSphere，则可以升级到较新版本。
+
+升级过程取消注册现有插件，并部署仅与 vSphere 7.0U1 及更高版本兼容的插件。
+
+
+CAUTION: 在升级之前，请验证您的环境是否满足系统要求。有关详细信息，请参见 link:scpivs44_deployment_planning_and_requirements.html["SnapCenter Plug-in for VMware vSphere 部署规划和要求"]。
 
 
 
+[[upgrade-paths]]
 == 升级路径
 
 |===
@@ -51,7 +57,7 @@ TIP: 在开始升级之前，请备份SnapCenter Plug-in for VMware vSphere。
 
 NOTE: 不支持将网络配置从静态切换到 DHCP。
 
-有关受支持版本的最新信息，请参阅 https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp 互操作性表工具"^]（IMT）。
+要了解有关受支持版本的最新信息，请参阅 link:https://imt.netapp.com/matrix/imt.jsp?components=134348;&solution=1517&isHWU&src=IMT["NetApp互操作性矩阵工具 (IMT)"^]。
 
 .步骤
 . 通过禁用SnapCenter Plug-in for VMware vSphere来准备升级。
@@ -62,7 +68,7 @@ NOTE: 不支持将网络配置从静态切换到 DHCP。
 
 . 下载升级 `.iso`文件。
 +
-.. 登录NetApp支持站点(https://mysupport.netapp.com/products/index.html[]）。
+.. 登录到 link:https://mysupport.netapp.com/products/index.html["NetApp 支持站点"^]。
 .. 从产品列表中，选择*SnapCenter Plug-in for VMware vSphere*，然后选择*下载最新版本*按钮。
 .. 下载SnapCenter Plug-in for VMware vSphere `.iso`文件到任意位置。
 

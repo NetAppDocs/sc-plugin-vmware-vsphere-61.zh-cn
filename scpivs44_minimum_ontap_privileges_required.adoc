@@ -21,6 +21,7 @@ NOTE: 从适用于 VMware (SCV) 5.0 的SnapCenter插件开始，您需要为任�
 
 
 
+[[minimum-ontap-privileges-required]]
 == 所需的最低ONTAP权限
 
 所有SnapCenter插件都需要以下最低权限。
@@ -70,6 +71,7 @@ NOTE: 您可以忽略有关不受支持的 vServer 命令的警告消息。
 
 
 
+[[additional-ontap-information]]
 == 更多ONTAP信息
 
 * 您需要ONTAP 9.12.1 或更高版本才能使用SnapMirror主动同步功能。

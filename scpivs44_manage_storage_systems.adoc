@@ -18,6 +18,7 @@ summary: 在使用 VMware vSphere 客户端备份或恢复虚拟机或数据存�
 
 
 
+[[modify-storage-vms]]
 == 修改存储虚拟机
 
 您可以使用 VMware vSphere 客户端修改在SnapCenter Plug-in for VMware vSphere中注册并用于 VM 数据保护操作的集群和存储 VM 的配置。
@@ -35,6 +36,7 @@ IMPORTANT: 如果您使用SnapCenter GUI 为基于应用程序的数据保护操
 
 
 
+[[remove-storage-vms]]
 == 删除存储虚拟机
 
 您可以使用 VMware vSphere 客户端从 vCenter 中的清单中删除存储虚拟机。

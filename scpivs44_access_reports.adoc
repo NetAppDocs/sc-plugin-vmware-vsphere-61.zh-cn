@@ -41,6 +41,7 @@ summary: 您可以从仪表板请求一个或多个作业的报告。
 
 
 
+[[types-of-reports-from-the-vmware-vsphere-client]]
 == VMware vSphere 客户端的报告类型
 
 SnapCenter的 VMware vSphere 客户端提供可自定义的报告选项，为您提供有关数据保护作业和插件资源状态的详细信息。您只能生成主要保护的报告。

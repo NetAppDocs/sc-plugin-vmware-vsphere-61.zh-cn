@@ -18,6 +18,7 @@ summary: 如果您正在使用适用SnapCenter Plug-in for VMware vSphere，则 
 
 
 
+[[vcenter-server-rbac]]
 == vCenter Server RBAC
 
 此安全机制适用于SnapCenter Plug-in for VMware vSphere执行的所有作业，包括虚拟机一致性、虚拟机崩溃一致性和SnapCenter服务器应用程序一致性（VMDK 上的应用程序）作业。此级别的 RBAC 限制了 vSphere 用户在 vSphere 对象（例如虚拟机 (VM) 和数据存储区）上执行SnapCenter Plug-in for VMware vSphere的能力。
@@ -41,6 +42,7 @@ vSphere 管理员通过执行以下操作来设置 vCenter Server RBAC：
 
 
 
+[[ontap-rbac]]
 == ONTAP RBAC
 
 此安全机制仅适用于SnapCenter Server 应用程序一致（VMDK 上的应用程序）作业。此级别限制了SnapCenter在特定存储系统上执行特定存储操作的能力，例如备份数据存储的存储。
@@ -55,6 +57,7 @@ vSphere 管理员通过执行以下操作来设置 vCenter Server RBAC：
 
 
 
+[[validation-workflow-for-rbac-privileges]]
 == RBAC 权限验证工作流程
 
 下图概述了 RBAC 权限的验证工作流程（vCenter 和ONTAP）：
